@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 12:07:33 by mgodawat          #+#    #+#             */
-/*   Updated: 2025/07/24 12:07:48 by mgodawat         ###   ########.fr       */
+/*   Created: 2025/07/26 17:55:54 by mgodawat          #+#    #+#             */
+/*   Updated: 2025/07/26 18:02:30 by mgodawat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
-
-#endif
+class PhoneBook {
+public:
+  int contacts[4];
+};
