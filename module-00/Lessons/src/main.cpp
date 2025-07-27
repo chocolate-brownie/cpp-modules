@@ -1,14 +1,16 @@
 #include <iostream>
-
-namespace MyNameSpace {
-	int x = 42;
-}
+#include <string.h>
 
 using namespace std;
 
-int main(void)
-{
-	cout << MyNameSpace::x << endl;
-	cout << MyNameSpace::x << endl;
-	return 0;
+class Car {
+public:
+  int speed(int maxSpeed);
+};
+
+int Car::speed(int maxSpeed) { return maxSpeed; }
+
+int main() {
+  Car myObj;
+  cout << myObj.speed(200) << endl;
 }
