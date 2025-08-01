@@ -6,7 +6,7 @@
 /*   By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 13:19:38 by mgodawat          #+#    #+#             */
-/*   Updated: 2025/08/01 18:00:11 by mgodawat         ###   ########.fr       */
+/*   Updated: 2025/08/01 18:54:46 by mgodawat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #include "../includes/phonebook.hpp"
 
 static void showManual(void) {
+  sleep(1);
   std::system("clear");
+
   std::cout << std::endl
             << "------------------- 📔 Phonebook -------------------"
             << std::endl

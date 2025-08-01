@@ -6,7 +6,7 @@
 /*   By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:14:09 by mgodawat          #+#    #+#             */
-/*   Updated: 2025/08/01 17:58:49 by mgodawat         ###   ########.fr       */
+/*   Updated: 2025/08/01 18:52:02 by mgodawat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,6 @@ void PhoneBook::addContact() {
   sleep(1);
 }
 
-void PhoneBook::searchContact() { printContactsTable(); }
+void PhoneBook::searchContact() {
+    std::system("clear");
+}
