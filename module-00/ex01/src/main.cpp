@@ -6,39 +6,52 @@
 /*   By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 13:19:38 by mgodawat          #+#    #+#             */
-/*   Updated: 2025/07/26 18:30:54 by mgodawat         ###   ########.fr       */
+/*   Updated: 2025/08/01 18:00:11 by mgodawat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/phonebook.class.hpp"
 #include "../includes/phonebook.hpp"
-#include <cstdlib>
-#include <string>
 
-static void showManual() {
-
-  cout << endl << "--Phonebook--" << endl << endl;
-  cout << "The program only accepts..." << endl << endl;
-  cout << GREEN << "ADD: " << RESET << "save a new contact" << endl;
-  cout << YELLOW << "SEARCH: " << RESET << "display a specific contact" << endl;
-  cout << RED << "EXIT: " << RESET
-       << "The program quits and the contacts are lost forever!" << endl
-       << endl;
+static void showManual(void) {
+  std::system("clear");
+  std::cout << std::endl
+            << "------------------- 📔 Phonebook -------------------"
+            << std::endl
+            << std::endl;
+  std::cout << "Please choose one of the following commands:" << std::endl
+            << std::endl;
+  std::cout << GREEN << "📑 ADD:    " << RESET << "Save a new contact"
+            << std::endl;
+  std::cout << YELLOW << "🔎 SEARCH: " << RESET << "Display a specific contact"
+            << std::endl;
+  std::cout << RED << "🚪 EXIT:   " << RESET << "Quit the phonebook"
+            << std::endl
+            << std::endl;
 }
 
 int main(void) {
+  std::string userInput;
+  PhoneBook phoneBook;
 
-  string userInput;
-  while (1) {
+  while (true) {
     showManual();
-    cout << "Choose an option: ";
-    getline(cin, userInput);
+    std::cout << "👉 Choose an option: ";
+    getline(std::cin, userInput);
+
     if (userInput == "EXIT") {
-      cout << "Exiting the phonebook" << endl;
-      return 0;
+      std::cout << "Goodbye! 👋" << std::endl;
+      sleep(1);
+      std::system("clear");
+      break;
     } else if (userInput == "ADD") {
-      //   save_contact(); TODO:
+      phoneBook.addContact();
     } else if (userInput == "SEARCH") {
-      //   search_contact(); TODO:
+      phoneBook.searchContact();
+    } else {
+      std::cout << RED << "❌ Error: Invalid option. Please try again." << RESET
+                << std::endl;
     }
   }
+  return (0);
 }

@@ -1,31 +1,24 @@
-/*
+#include <iomanip>
 #include <iostream>
 
-using namespace std;
+int main() {
+  // Table header
+  std::cout << std::setw(15) << std::left << "Name" << std::setw(10)
+            << std::right << "Age" << std::endl;
 
-class Computer {
-public:
-  string brand;
-  string model;
+  // Table separator
+  std::cout << std::setw(15) << std::setfill('-') << "" << std::setw(10) << ""
+            << std::setfill(' ') << std::endl;
 
-  Computer() {
-    brand = "Unknown";
-    model = "Unknown";
-  }
+  // Table rows
+  std::cout << std::setw(15) << std::left << "Alice" << std::setw(10)
+            << std::right << 23 << std::endl;
 
-  Computer(string x, string y) {
-    brand = x;
-    model = y;
-  }
-};
+  std::cout << std::setw(15) << std::left << "Bob" << std::setw(10)
+            << std::right << 31 << std::endl;
 
-int main(void) {
-  Computer laptop1;
-  Computer laptop2("HP", "Omen");
-  Computer laptop3("Dell", "XPS");
-  cout << "Your computer is " << laptop1.brand << ": " << laptop1.model << endl;
-  cout << "Your computer is " << laptop2.brand << ": " << laptop2.model << endl;
-  cout << "Your computer is " << laptop3.brand << ": " << laptop3.model << endl;
+  std::cout << std::setw(15) << std::left << "Charlie" << std::setw(10)
+            << std::right << 18 << std::endl;
+
   return 0;
 }
- */

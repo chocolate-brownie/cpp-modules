@@ -6,7 +6,7 @@
 /*   By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 18:10:38 by mgodawat          #+#    #+#             */
-/*   Updated: 2025/07/26 18:14:29 by mgodawat         ###   ########.fr       */
+/*   Updated: 2025/08/01 18:00:28 by mgodawat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 #define YELLOW "\033[33m"
 #define BLUE "\033[34m"
 
-#include "contact.class.hpp"
-#include "phonebook.class.hpp"
 #include <iostream>
-
-using namespace std;
+#include <string>
+#include <iomanip>
+#include <unistd.h>
+#include <cstdlib>
 
 #endif
