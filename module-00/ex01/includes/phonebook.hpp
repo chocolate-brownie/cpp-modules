@@ -6,7 +6,7 @@
 /*   By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 18:10:38 by mgodawat          #+#    #+#             */
-/*   Updated: 2025/08/01 18:00:28 by mgodawat         ###   ########.fr       */
+/*   Updated: 2025/08/05 14:55:47 by mgodawat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <string>
 #include <iomanip>
 #include <unistd.h>
+#include <sstream>
 #include <cstdlib>
 
 #endif
