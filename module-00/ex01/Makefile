@@ -11,12 +11,18 @@
 #                                                                              #
 # **************************************************************************** #
 
+
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iinclude/
-NAME = phonebook
+NAME = megaphone
 SRC_DIR = src
 OBJ_DIR = build
-SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+
+SRCS =	$(SRC_DIR)/main.cpp \
+		$(SRC_DIR)/contact.cpp \
+		$(SRC_DIR)/phonebook.cpp \
+
+
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 
 all: $(NAME)
