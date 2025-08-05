@@ -18,8 +18,7 @@ NAME = account
 SRC_DIR = src
 OBJ_DIR = build
 
-SRCS =	$(SRC_DIR)/account.cpp \
-		$(SRC_DIR)/test.cpp \
+SRCS =	$(SRC_DIR)/Account.cpp \
 
 
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))

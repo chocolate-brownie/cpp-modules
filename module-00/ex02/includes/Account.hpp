@@ -26,8 +26,8 @@ public:
   static int getNbWithdrawals(void);
   static void displayAccountsInfos(void);
 
-  Account(int initial_deposit);
-  ~Account(void);
+  Account(int initial_deposit); // constructor
+  ~Account(void); // destructor
 
   void makeDeposit(int deposit);
   bool makeWithdrawal(int withdrawal);
