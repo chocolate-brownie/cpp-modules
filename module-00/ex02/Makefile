@@ -1,3 +1,4 @@
+
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -5,18 +6,21 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/07/24 13:18:11 by mgodawat          #+#    #+#              #
-#    Updated: 2025/08/05 16:44:52 by mgodawat         ###   ########.fr        #
+#    Created: 2025/07/23 19:06:47 by mgodawat          #+#    #+#              #
+#    Updated: 2025/07/23 19:09:44 by mgodawat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iinclude/
-NAME = megaphone
+NAME = account
 SRC_DIR = src
 OBJ_DIR = build
 
-SRCS = 	$(SRC_DIR)/megaphone.cpp \
+SRCS =	$(SRC_DIR)/account.cpp \
+		$(SRC_DIR)/test.cpp \
+
 
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 

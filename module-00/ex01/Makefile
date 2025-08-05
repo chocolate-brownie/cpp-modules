@@ -14,7 +14,7 @@
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iinclude/
-NAME = megaphone
+NAME = phonebook
 SRC_DIR = src
 OBJ_DIR = build
 
@@ -24,6 +24,10 @@ SRCS =	$(SRC_DIR)/main.cpp \
 
 
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
+
+ifdef DEBUG
+	CXXFLAGS += -g -fsanitize=address
+endif
 
 all: $(NAME)
 
