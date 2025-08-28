@@ -5,17 +5,20 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/08/28 11:38:18 by mgodawat          #+#    #+#              #
-#    Updated: 2025/08/28 11:38:50 by mgodawat         ###   ########.fr        #
+#    Created: 2025/08/28 11:38:24 by mgodawat          #+#    #+#              #
+#    Updated: 2025/08/28 17:25:59 by mgodawat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = hi_this_is_brain
+NAME = unnecessary_violence
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I.
 
 SRCS =	main.cpp \
+		humanA.cpp \
+		humanB.cpp \
+		Weapon.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
