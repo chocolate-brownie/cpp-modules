@@ -6,7 +6,7 @@
 #    By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/28 11:38:24 by mgodawat          #+#    #+#              #
-#    Updated: 2025/08/28 21:24:31 by mgodawat         ###   ########.fr        #
+#    Updated: 2025/08/30 16:02:47 by mgodawat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I.
 
 SRCS =	main.cpp \
+		Harl.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
