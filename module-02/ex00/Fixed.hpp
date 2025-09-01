@@ -1,20 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 12:14:54 by mgodawat          #+#    #+#             */
-/*   Updated: 2025/09/01 12:15:27 by mgodawat         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
 #include <string>
 
-class Fixed {};
+class Fixed {
+private:
+  int fixedPointNumberValue;
+  static const int numberOfFractionalBits = 8;
+
+public:
+  Fixed();
+  Fixed(const Fixed &other);
+};
 
 #endif
