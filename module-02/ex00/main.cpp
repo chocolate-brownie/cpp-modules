@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 18:47:37 by mgodawat          #+#    #+#             */
-/*   Updated: 2025/08/26 18:48:22 by mgodawat         ###   ########.fr       */
+/*   Created: 2025/09/01 12:13:44 by mgodawat          #+#    #+#             */
+/*   Updated: 2025/09/01 12:14:43 by mgodawat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Fixed.hpp"
+#include <iostream>
 
-void randomChump(std::string name) {
-    Zombie stackZombie = Zombie(name);
-    stackZombie.announce();
+int main(void) {
+  Fixed a;
+  Fixed b(a);
+  Fixed c;
+
+  c = b;
+
+  std::cout << a.getRawBits() << std::endl;
+  std::cout << b.getRawBits() << std::endl;
+  std::cout << c.getRawBits() << std::endl;
+
+  return 0;
 }

@@ -5,18 +5,19 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/08/28 11:38:24 by mgodawat          #+#    #+#              #
-#    Updated: 2025/09/01 14:15:42 by mgodawat         ###   ########.fr        #
+#    Created: 2025/09/01 12:06:41 by mgodawat          #+#    #+#              #
+#    Updated: 2025/09/01 12:07:28 by mgodawat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = replace
+NAME = ocf
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I.
 
 SRCS =	main.cpp \
-		replace.cpp
+		zombieHorde.cpp \
+		Zombie.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 

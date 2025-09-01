@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgodawat <mgodawat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 18:47:37 by mgodawat          #+#    #+#             */
-/*   Updated: 2025/08/26 18:48:22 by mgodawat         ###   ########.fr       */
+/*   Created: 2025/09/01 12:14:54 by mgodawat          #+#    #+#             */
+/*   Updated: 2025/09/01 12:15:27 by mgodawat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
-void randomChump(std::string name) {
-    Zombie stackZombie = Zombie(name);
-    stackZombie.announce();
-}
+#include <string>
+
+class Fixed {};
+
+#endif
