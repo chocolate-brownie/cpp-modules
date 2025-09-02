@@ -6,10 +6,17 @@ Fixed::Fixed() : fixedPointNumberValue(0) {
   return;
 }
 
-/* Fixed::Fixed(const Fixed &other)
+/**
+Writing the copy constructor this way is also correct. Usually
+the more robust way is this but since I have to recreate the
+subject output exactly as it is. I am forced to write it in a
+different way
+
+Fixed::Fixed(const Fixed &other)
     : fixedPointNumberValue(other.fixedPointNumberValue) {
   std::cout << "Copy constructor called" << std::endl;
-} */
+}
+*/
 
 Fixed::Fixed(const Fixed &other) {
   std::cout << "Copy constructor called" << std::endl;
