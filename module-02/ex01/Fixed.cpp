@@ -1,0 +1,36 @@
+#include "Fixed.hpp"
+#include <cmath>
+#include <iostream>
+
+/* ---------------- Stuff from ex00 ------------- */
+Fixed::Fixed() : fixedPointNumberValue(0) {
+  std::cout << "Default construtor called" << std::endl;
+  return;
+}
+
+Fixed::Fixed(const Fixed &other) {
+  std::cout << "Copy constructor called" << std::endl;
+  *this = other;
+}
+
+Fixed &Fixed::operator=(const Fixed &other) {
+  std::cout << "Copy assignment operatore called" << std::endl;
+  if (this != &other) {
+    this->fixedPointNumberValue = other.getRawBits();
+  }
+  return *this;
+}
+
+Fixed::~Fixed() { std::cout << "Destructor called" << std::endl; }
+
+int Fixed::getRawBits(void) const {
+  std::cout << "getRawBits member function called" << std::endl;
+  return this->fixedPointNumberValue;
+}
+
+void Fixed::setRawBits(int const raw) { this->fixedPointNumberValue = raw; }
+
+/* ---------------- Stuff from ex01 ------------- */
+Fixed::Fixed(const int number) { return; }
+
+Fixed::Fixed(const float number) { return; }
