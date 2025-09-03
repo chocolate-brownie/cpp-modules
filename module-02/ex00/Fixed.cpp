@@ -2,7 +2,7 @@
 #include <iostream>
 
 Fixed::Fixed() : fixedPointNumberValue(0) {
-  std::cout << "Default construtor called" << std::endl;
+  std::cout << "Default constructor called" << std::endl;
   return;
 }
 
@@ -24,7 +24,7 @@ Fixed::Fixed(const Fixed &other) {
 }
 
 Fixed &Fixed::operator=(const Fixed &other) {
-  std::cout << "Copy assignment operatore called" << std::endl;
+  std::cout << "Copy assignment operator called" << std::endl;
   if (this != &other) {
     this->fixedPointNumberValue = other.getRawBits();
   }
