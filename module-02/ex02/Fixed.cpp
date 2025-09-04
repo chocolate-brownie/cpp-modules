@@ -3,25 +3,18 @@
 #include <iostream>
 
 /* ---------------- Stuff from ex00 ------------- */
-Fixed::Fixed() : fixedPointNumberValue(0) {
-  std::cout << "Default constructor called" << std::endl;
-  return;
-}
+Fixed::Fixed() : fixedPointNumberValue(0) { return; }
 
-Fixed::Fixed(const Fixed &other) {
-  std::cout << "Copy constructor called" << std::endl;
-  *this = other;
-}
+Fixed::Fixed(const Fixed &other) { *this = other; }
 
 Fixed &Fixed::operator=(const Fixed &other) {
-  std::cout << "Copy assignment operator called" << std::endl;
   if (this != &other) {
     this->fixedPointNumberValue = other.getRawBits();
   }
   return *this;
 }
 
-Fixed::~Fixed() { std::cout << "Destructor called" << std::endl; }
+Fixed::~Fixed() { return; }
 
 int Fixed::getRawBits(void) const { return this->fixedPointNumberValue; }
 
@@ -29,14 +22,10 @@ void Fixed::setRawBits(int const raw) { this->fixedPointNumberValue = raw; }
 
 /* ---------------- Stuff from ex01 ------------- */
 Fixed::Fixed(const int number)
-    : fixedPointNumberValue(number << numberOfFractionalBits) {
-  std::cout << "Int constructor called" << std::endl;
-}
+    : fixedPointNumberValue(number << numberOfFractionalBits) {}
 
 Fixed::Fixed(const float number)
-    : fixedPointNumberValue(roundf(number * (1 << numberOfFractionalBits))) {
-  std::cout << "Float constructor called" << std::endl;
-}
+    : fixedPointNumberValue(roundf(number * (1 << numberOfFractionalBits))) {}
 
 int Fixed::toInt(void) const {
   return fixedPointNumberValue >> numberOfFractionalBits;
@@ -58,17 +47,25 @@ std::ostream &operator<<(std::ostream &os, const Fixed &obj) {
 }
 
 /* ---------------- Stuff from ex02 ------------- */
-bool Fixed::operator<(const Fixed &other) {
+bool Fixed::operator<(const Fixed &other) const {
   return this->fixedPointNumberValue < other.fixedPointNumberValue;
 }
 
-bool Fixed::operator>(const Fixed &other) {
+bool Fixed::operator>(const Fixed &other) const {
   return this->fixedPointNumberValue > other.fixedPointNumberValue;
 }
 
-bool Fixed::operator==(const Fixed &other) {
+bool Fixed::operator==(const Fixed &other) const {
   return this->fixedPointNumberValue == other.fixedPointNumberValue;
 }
+
+/* *this means "the current instance of the Fixed object on which this method
+ * was called. */
+bool Fixed::operator!=(const Fixed &other) const { return !(*this == other); }
+
+bool Fixed::operator>=(const Fixed &other) const { return !(*this < other); }
+
+bool Fixed::operator<=(const Fixed &other) const { return !(*this > other); }
 
 Fixed Fixed::operator+(const Fixed &other) {
   Fixed result;
@@ -121,4 +118,16 @@ Fixed Fixed::operator--(int) {
   Fixed temp = *this;
   this->fixedPointNumberValue--;
   return temp;
+}
+
+Fixed &Fixed::max(Fixed &a, Fixed &b) { return (a > b) ? a : b; }
+
+const Fixed &Fixed::max(const Fixed &a, const Fixed &b) {
+  return (a > b) ? a : b;
+}
+
+Fixed &Fixed::min(Fixed &a, Fixed &b) { return (a < b) ? a : b; }
+
+const Fixed &Fixed::min(const Fixed &a, const Fixed &b) {
+  return (a < b) ? a : b;
 }
