@@ -70,6 +70,20 @@ public:
   static const Fixed &max(const Fixed &a, const Fixed &b);
 };
 
+/*The reason is that the object on the left-hand side of the operator determines
+how the function is called.
+
+When you write std::cout << a;, the object on the left is std::cout, which is an
+ostream object, not a Fixed object.
+
+If operator<< were a member function of the Fixed class, the syntax would have
+to be a << std::cout;, which is unnatural and doesn't work with the standard
+library's streaming design.
+
+Because we can't add new functions to the std::ostream class, the only way to
+make the natural syntax std::cout << a; work is to declare operator<< as a
+non-member function that takes the stream as its first argument and your Fixed
+object as its second.*/
 std::ostream &operator<<(std::ostream &os, const Fixed &obj);
 
 #endif
