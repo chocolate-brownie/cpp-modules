@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 static void printInformation(const ClapTrap& member) {
     std::cout << std::endl;
@@ -58,12 +59,23 @@ int main() {
     printInformation(obj2);
 
     std::cout << "\n-------- TESTING MEMBER FUNCTIONS --------" << std::endl;
-    member2.takeDamage(5);  // HP becomes 5
+    member2.takeDamage(5);
     printInformation(member2);
-    member2.beRepaired(3);  // HP becomes 8, Energy becomes 9
+    member2.beRepaired(3);
     printInformation(member2);
-    member2.takeDamage(10);  // HP becomes 0 (death)
+    member2.takeDamage(10);
     printInformation(member2);
-    member2.beRepaired(5);  // Fails because HP is 0
+    member2.beRepaired(5);
     printInformation(member2);
+
+    std::cout << "\n\n-------- TESTING SCAVTRAP --------" << std::endl;
+    ScavTrap scav("Scavvy");
+
+    scav.attack("a training dummy");
+    scav.takeDamage(30);
+    scav.beRepaired(10);
+    scav.guardGate();
+    scav.takeDamage(100);
+    printInformation(scav);
+    scav.attack("another dummy");  // Should fail
 }
