@@ -19,7 +19,7 @@ ClapTrap::ClapTrap(const ClapTrap& other)
       hitPoints(other.hitPoints),
       energyPoints(other.energyPoints),
       attackDamage(other.attackDamage) {
-    std::cout << Color::GREEN << "Copy constructor called" << Color::RESET
+    std::cout << Color::BOLD << "Copy constructor called" << Color::RESET
               << std::endl;
     return;
 }
@@ -31,14 +31,14 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
         this->energyPoints = other.energyPoints;
         this->attackDamage = other.attackDamage;
     }
-    std::cout << Color::GREEN << "Copy assignment operator called"
+    std::cout << Color::BOLD << "Copy assignment operator called"
               << Color::RESET << std::endl;
     return *this;
 }
 
 ClapTrap::~ClapTrap(void) {
-    std::cout << Color::BOLD << "Destructor called" << Color::RESET
-              << std::endl;
+    std::cout << Color::BOLD << "ClapTrap destructor called for " << this->name
+              << Color::RESET << std::endl;
 }
 
 /* ************************************************************************** */

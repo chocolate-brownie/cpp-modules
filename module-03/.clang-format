@@ -1,6 +1,6 @@
 BasedOnStyle: Google
 IndentWidth: 4
 ColumnLimit: 80
-AllowShortIfStatementsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: true
 DerivePointerAlignment: false
 PointerAlignment: Left
