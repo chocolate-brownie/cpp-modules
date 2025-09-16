@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "ClapTrap.hpp"
+#include "DiamondTrap.hpp"
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
@@ -90,4 +91,9 @@ int main() {
     frag.takeDamage(100);
     printInformation(frag);
     frag.attack("another rusty car");  // Should fail
+
+    std::cout << "\n\n-------- TESTING DIAMONDTRAP --------" << std::endl;
+
+
+
 }
