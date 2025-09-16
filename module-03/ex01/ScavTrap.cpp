@@ -35,7 +35,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
 
     ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
         if (this != &other) {
-            // Manually copy all inherited members
+            --  Manually copy all inherited members --
             this->name = other.name;
             this->hitPoints = other.hitPoints;
             this->energyPoints = other.energyPoints;
