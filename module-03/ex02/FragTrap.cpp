@@ -23,6 +23,13 @@ FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other) {
               << Color::RESET << std::endl;
 }
 
+FragTrap& FragTrap::operator=(const FragTrap& other) {
+    std::cout << Color::BOLD << "FragTrap COPY ASSIGNMENT OPERATOR called"
+              << Color::RESET << std::endl;
+    if (this != &other) ClapTrap::operator=(other);
+    return *this;
+}
+
 FragTrap::~FragTrap() {
     std::cout << Color::BOLD << "FragTrap destructor called for " << this->name
               << Color::RESET << std::endl;

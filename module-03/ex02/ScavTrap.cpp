@@ -5,7 +5,7 @@
 #include "ClapTrap.hpp"
 /* ************************************************************************** */
 /* */
-/* OCF functions and the name constructor */
+/* OCF functions */
 /* */
 /* ************************************************************************** */
 
@@ -18,6 +18,29 @@ ScavTrap::ScavTrap(void) : ClapTrap() {
               << Color::RESET << std::endl;
 }
 
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
+    std::cout << Color::BOLD << "ScavTrap COPY constructor called"
+              << Color::RESET << std::endl;
+}
+
+ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
+    std::cout << Color::BOLD << "ScavTrap COPY ASSIGNMENT OPERATOR called"
+              << Color::RESET << std::endl;
+    if (this != &other) ClapTrap::operator=(other);
+    return *this;
+}
+
+ScavTrap::~ScavTrap(void) {
+    std::cout << Color::BOLD << "ScavTrap destructor called for " << this->name
+              << Color::RESET << std::endl;
+}
+
+/* ************************************************************************** */
+/* */
+/* Name constructor */
+/* */
+/* ************************************************************************** */
+
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
     this->hitPoints = 100;
     this->energyPoints = 50;
@@ -25,16 +48,6 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 
     std::cout << Color::BOLD << "ScavTrap NAME constructor called for "
               << this->name << Color::RESET << std::endl;
-}
-
-ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
-    std::cout << Color::BOLD << "ScavTrap COPY constructor called"
-              << Color::RESET << std::endl;
-}
-
-ScavTrap::~ScavTrap(void) {
-    std::cout << Color::BOLD << "ScavTrap destructor called for " << this->name
-              << Color::RESET << std::endl;
 }
 
 /* ************************************************************************** */
