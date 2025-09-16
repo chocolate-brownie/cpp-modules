@@ -15,8 +15,6 @@ static void printInformation(const ClapTrap& member) {
 }
 
 int main() {
-    // Checking OCF functions
-
     ClapTrap member1;
     std::cout << std::endl;
     std::cout << "-------- Use of DEFAULT constructor --------" << std::endl;
@@ -79,7 +77,7 @@ int main() {
     scav.guardGate();
     scav.takeDamage(100);
     printInformation(scav);
-    scav.attack("another dummy");  // Should fail
+    scav.attack("another dummy");
 
     std::cout << "\n\n-------- TESTING FRAGTRAP --------" << std::endl;
     FragTrap frag("Fraggy");
@@ -90,10 +88,24 @@ int main() {
     frag.highFivesGuys();
     frag.takeDamage(100);
     printInformation(frag);
-    frag.attack("another rusty car");  // Should fail
+    frag.attack("another rusty car");
 
     std::cout << "\n\n-------- TESTING DIAMONDTRAP --------" << std::endl;
+    DiamondTrap diamond1;
+    DiamondTrap diamond2("I am Diamond 2");
 
+    printInformation(diamond1);
 
+    diamond1.attack("sapphire");
+    diamond1.takeDamage(26);
+    diamond1.beRepaired(11);
+    diamond1.whoAmI();
+    diamond1.takeDamage(3);
+    printInformation(diamond1);
+    diamond1.attack("blue sapphire");
 
+    diamond2 = diamond1;
+    printInformation(diamond2);
+
+    return 0;
 }
