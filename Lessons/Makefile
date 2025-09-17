@@ -1,9 +1,9 @@
-NAME = ex00
+NAME = lessons
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I.
 
-SRCS =	main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+SRCS =	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
