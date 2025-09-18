@@ -4,10 +4,10 @@
 #include <string>
 
 class WrongAnimal {
-    protected:
+  protected:
     std::string type;
 
-    public:
+  public:
     WrongAnimal();
     WrongAnimal(const WrongAnimal& other);
     WrongAnimal& operator=(const WrongAnimal& other);

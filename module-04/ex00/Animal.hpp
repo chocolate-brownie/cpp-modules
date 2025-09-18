@@ -11,15 +11,15 @@ const char YELLOW[] = "\033[33m";
 const char MAGENTA[] = "\033[35m";
 const char CYAN[] = "\033[36m";
 const char WHITE[] = "\033[37m";
-}
+} // namespace Color
 
 #include <string>
 
 class Animal {
-    protected:
+  protected:
     std::string type;
 
-    public:
+  public:
     Animal();
     Animal(const Animal& other);
     Animal& operator=(const Animal& other);

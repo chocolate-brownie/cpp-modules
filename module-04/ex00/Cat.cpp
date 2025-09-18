@@ -9,15 +9,18 @@
 /* ************************************************************************** */
 Cat::Cat() {
     type = "Cat";
-    std::cout << Color::CYAN << "Cat DEFAULT Constructed called" << Color::RESET << std::endl;
+    std::cout << Color::CYAN << "Cat DEFAULT Constructed called" << Color::RESET
+              << std::endl;
 }
 
-Cat::Cat(const Cat& other): Animal(other) {
-    std::cout << Color::CYAN << "Cat COPY Constructed called" << Color::RESET << std::endl;
+Cat::Cat(const Cat& other) : Animal(other) {
+    std::cout << Color::CYAN << "Cat COPY Constructed called" << Color::RESET
+              << std::endl;
 }
 
 Cat& Cat::operator=(const Cat& other) {
-    std::cout << Color::CYAN << "Cat COPY ASSIGN OP called" << Color::RESET << std::endl;
+    std::cout << Color::CYAN << "Cat COPY ASSIGN OP called" << Color::RESET
+              << std::endl;
     if (this != &other) {
         Animal::operator=(other);
     }
@@ -25,7 +28,8 @@ Cat& Cat::operator=(const Cat& other) {
 }
 
 Cat::~Cat() {
-    std::cout << Color::CYAN << "Cat DESTRUCTOR called" << Color::RESET << std::endl;
+    std::cout << Color::CYAN << "Cat DESTRUCTOR called" << Color::RESET
+              << std::endl;
 }
 
 /* ************************************************************************** */
@@ -33,6 +37,4 @@ Cat::~Cat() {
 /* Member functions */
 /* */
 /* ************************************************************************** */
-void Cat::makeSound() const {
-    std::cout << "Meow!" << std::endl;
-}
+void Cat::makeSound() const { std::cout << "Meow!" << std::endl; }
