@@ -23,6 +23,9 @@ class Animal {
     Animal();
     Animal(const Animal& other);
     Animal& operator=(const Animal& other);
+
+    /* Declaring the base class destructor as virtual ensures correct destructor
+    chaining when deleting derived objects via base pointers.*/
     virtual ~Animal();
 
     /* Making the method virtual allows the derived classes to access this
