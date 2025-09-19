@@ -15,6 +15,9 @@ class Cat : public Animal {
     ~Cat();
 
     void makeSound() const;
+
+    void setIdea(int index, const std::string& idea);
+    void printIdea(int index) const;
 };
 
 #endif

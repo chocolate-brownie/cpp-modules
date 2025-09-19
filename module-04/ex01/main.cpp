@@ -17,6 +17,14 @@ int main() {
     i->makeSound();
     j->makeSound();
 
+    Cat cat;
+    cat.setIdea(0, "Hello");
+    cat.setIdea(1, "Human");
+    cat.setIdea(2, "Person");
+    for (int i = 0; i < 3; i++) {
+        cat.printIdea(i);
+    }
+
     meta->makeSound();
 
     std::cout << std::endl << "--- WrongAnimal class test ----" << std::endl;
