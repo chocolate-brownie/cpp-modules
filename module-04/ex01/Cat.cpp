@@ -24,7 +24,9 @@ Cat& Cat::operator=(const Cat& other) {
               << std::endl;
     if (this != &other) {
         Animal::operator=(other);
-        *brain = *other.brain;
+        // *brain = *other.brain;
+        delete brain;
+        brain = new Brain(*other.brain);
     }
     return *this;
 }
