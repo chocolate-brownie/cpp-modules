@@ -13,7 +13,7 @@ Character::Character(const std::string charName) : _charName(charName) {
 
 Character::Character(const Character& other) {}
 
-Character& Character::operator=(const Character& other) {}
+Character& Character::operator=(const Character& other) { return *this; }
 
 Character::~Character() {}
 
@@ -22,7 +22,7 @@ Character::~Character() {}
 /* Other member methods */
 /* */
 /* ************************************************************************** */
-std::string const& Character::getName() const {}
+std::string const& Character::getName() const { return _charName; }
 
 void Character::equip(AMateria* m) {}
 
