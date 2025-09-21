@@ -9,12 +9,16 @@
 /* */
 /* ************************************************************************** */
 Character::Character(const std::string charName) : _charName(charName) {
+    std::cout << Color::GREEN << "Character DEFAULT constructor called."
+              << Color::RESET << std::endl;
     for (int i = 0; i < 4; ++i)
         _inventory[i] = 0;
     return;
 }
 
 Character::Character(const Character& other) : _charName(other._charName) {
+    std::cout << Color::YELLOW << "Character COPY constructor called."
+              << Color::RESET << std::endl;
     for (int i = 0; i < 4; ++i) {
         if (other._inventory[i])
             _inventory[i] = other._inventory[i]->clone();
@@ -24,6 +28,8 @@ Character::Character(const Character& other) : _charName(other._charName) {
 }
 
 Character& Character::operator=(const Character& other) {
+    std::cout << Color::MAGENTA << "Character COPY ASSIGNMENT OPERATOR called."
+              << Color::RESET << std::endl;
     if (this != &other) {
         _charName = other._charName;
 
@@ -41,6 +47,8 @@ Character& Character::operator=(const Character& other) {
 }
 
 Character::~Character() {
+    std::cout << Color::RED << "Character destructor called." << Color::RESET
+              << std::endl;
     for (int i = 0; i < 4; ++i)
         delete _inventory[i];
 }
