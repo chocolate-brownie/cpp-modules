@@ -21,5 +21,6 @@ AMateria::~AMateria() {}
 /* */
 /* ************************************************************************** */
 
-void AMateria::use(ICharacter& target) { return; }
+void AMateria::use(ICharacter&) { return; }
+
 std::string const& AMateria::getType() const { return _type; }

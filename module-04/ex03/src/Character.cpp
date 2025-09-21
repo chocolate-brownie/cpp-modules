@@ -10,7 +10,7 @@
 /* ************************************************************************** */
 Character::Character(const std::string charName) : _charName(charName) {
     for (int i = 0; i < 4; ++i)
-        _inventory[i] = nullptr;
+        _inventory[i] = 0;
     return;
 }
 
@@ -19,7 +19,7 @@ Character::Character(const Character& other) : _charName(other._charName) {
         if (other._inventory[i])
             _inventory[i] = other._inventory[i]->clone();
         else
-            _inventory[i] = nullptr;
+            _inventory[i] = 0;
     }
 }
 
@@ -34,7 +34,7 @@ Character& Character::operator=(const Character& other) {
             if (other._inventory[i])
                 _inventory[i] = other._inventory[i]->clone();
             else
-                _inventory[i] = nullptr;
+                _inventory[i] = 0;
         }
     }
     return *this;
@@ -54,7 +54,7 @@ std::string const& Character::getName() const { return _charName; }
 
 void Character::equip(AMateria* m) {
     for (int i = 0; i < 4; ++i) {
-        if (_inventory[i] == nullptr) {
+        if (_inventory[i] == 0) {
             _inventory[i] = m;
             return;
         }
@@ -63,7 +63,7 @@ void Character::equip(AMateria* m) {
 
 void Character::unequip(int idx) {
     if ((idx >= 0 && idx <= 3) && _inventory[idx])
-        _inventory[idx] = nullptr;
+        _inventory[idx] = 0;
     else
         std::cout << "Error: Index is out of range" << std::endl;
 }
