@@ -11,7 +11,7 @@ class WrongAnimal {
     WrongAnimal();
     WrongAnimal(const WrongAnimal& other);
     WrongAnimal& operator=(const WrongAnimal& other);
-    virtual ~WrongAnimal();
+    ~WrongAnimal();
 
     /* Making the method virtual allows the derived classes to access this
     function and modifies thus activating the polymorphic feature */
