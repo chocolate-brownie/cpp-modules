@@ -1,4 +1,4 @@
-NAME		= materia
+NAME		= ex03
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
