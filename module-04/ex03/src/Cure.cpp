@@ -8,26 +8,22 @@
 /* */
 /* ************************************************************************** */
 Cure::Cure() : AMateria("cure") {
-    std::cout << Color::GREEN << "Cure DEFAULT constructor called."
-              << Color::RESET << std::endl;
+    std::cout << "Cure DEFAULT constructor called." << std::endl;
     return;
 }
 Cure::Cure(const Cure& other) : AMateria(other) {
-    std::cout << Color::YELLOW << "Cure COPY constructor called."
-              << Color::RESET << std::endl;
+    std::cout << "Cure COPY constructor called." << std::endl;
     return;
 }
 
 Cure& Cure::operator=(const Cure& other) {
-    std::cout << Color::MAGENTA << "Cure COPY ASSIGNMENT OPERATOR called."
-              << Color::RESET << std::endl;
+    std::cout << "Cure COPY ASSIGNMENT OPERATOR called." << std::endl;
     if (this != &other) AMateria::operator=(other);
     return *this;
 }
 
 Cure::~Cure() {
-    std::cout << Color::RED << "Cure destructor called." << Color::RESET
-              << std::endl;
+    std::cout << "Cure destructor called." << std::endl;
     return;
 }
 

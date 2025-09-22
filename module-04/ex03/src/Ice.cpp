@@ -7,26 +7,22 @@
 /* */
 /* ************************************************************************** */
 Ice::Ice() : AMateria("ice") {
-    std::cout << Color::GREEN << "Ice DEFAULT constructor called."
-              << Color::RESET << std::endl;
+    std::cout << "Ice DEFAULT constructor called." << std::endl;
     return;
 }
 Ice::Ice(const Ice& other) : AMateria(other) {
-    std::cout << Color::YELLOW << "Cure COPY constructor called."
-              << Color::RESET << std::endl;
+    std::cout << "Cure COPY constructor called." << std::endl;
     return;
 }
 
 Ice& Ice::operator=(const Ice& other) {
-    std::cout << Color::MAGENTA << "Cure COPY ASSIGNMENT OPERATOR called."
-              << Color::RESET << std::endl;
+    std::cout << "Cure COPY ASSIGNMENT OPERATOR called." << std::endl;
     if (this != &other) AMateria::operator=(other);
     return *this;
 }
 
 Ice::~Ice() {
-    std::cout << Color::RED << "Cure destructor called." << Color::RESET
-              << std::endl;
+    std::cout << "Cure destructor called." << std::endl;
     return;
 }
 

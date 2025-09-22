@@ -1,5 +1,4 @@
 #include "WrongAnimal.hpp"
-#include "Animal.hpp"
 #include <iostream>
 
 /* ************************************************************************** */
@@ -8,18 +7,15 @@
 /* */
 /* ************************************************************************** */
 WrongAnimal::WrongAnimal() : type("WrongAnimal") {
-    std::cout << Color::CYAN << "WrongAnimal DEFAULT Constructed called"
-              << Color::RESET << std::endl;
+    std::cout << "WrongAnimal DEFAULT Constructed called" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& other) : type(other.type) {
-    std::cout << Color::CYAN << "WrongAnimal COPY Constructed called"
-              << Color::RESET << std::endl;
+    std::cout << "WrongAnimal COPY Constructed called" << std::endl;
 }
 
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& other) {
-    std::cout << Color::CYAN << "WrongAnimal COPY ASSIGN OP called"
-              << Color::RESET << std::endl;
+    std::cout << "WrongAnimal COPY ASSIGN OP called" << std::endl;
     if (this != &other) {
         type = other.type;
     }
@@ -27,8 +23,7 @@ WrongAnimal& WrongAnimal::operator=(const WrongAnimal& other) {
 }
 
 WrongAnimal::~WrongAnimal() {
-    std::cout << Color::CYAN << "WrongAnimal Destructor called" << Color::RESET
-              << std::endl;
+    std::cout << "WrongAnimal Destructor called" << std::endl;
 }
 
 /* ************************************************************************** */

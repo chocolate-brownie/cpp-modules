@@ -7,15 +7,13 @@
 /* */
 /* ************************************************************************** */
 MateriaSource::MateriaSource() {
-    std::cout << Color::GREEN << "MateriaSource DEFAULT constructor called."
-              << Color::RESET << std::endl;
+    std::cout << "MateriaSource DEFAULT constructor called." << std::endl;
     for (int i = 0; i < 4; i++)
         _template[i] = 0;
 };
 
 MateriaSource::MateriaSource(const MateriaSource& other) {
-    std::cout << Color::YELLOW << "MateriaSource COPY constructor called."
-              << Color::RESET << std::endl;
+    std::cout << "MateriaSource COPY constructor called." << std::endl;
     for (int i = 0; i < 4; i++) {
         if (other._template[i])
             _template[i] = other._template[i]->clone();
@@ -25,8 +23,7 @@ MateriaSource::MateriaSource(const MateriaSource& other) {
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
-    std::cout << Color::MAGENTA << "Cure COPY ASSIGNMENT OPERATOR called."
-              << Color::RESET << std::endl;
+    std::cout << "Cure COPY ASSIGNMENT OPERATOR called." << std::endl;
     if (this != &other) {
         for (int i = 0; i < 4; ++i)
             delete _template[i];
@@ -42,8 +39,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
 }
 
 MateriaSource::~MateriaSource() {
-    std::cout << Color::RED << "Cure destructor called." << Color::RESET
-              << std::endl;
+    std::cout << "Cure destructor called." << std::endl;
     for (int i = 0; i < 4; ++i)
         delete _template[i];
 }

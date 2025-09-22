@@ -9,28 +9,22 @@
 /* ************************************************************************** */
 Cat::Cat() {
     type = "Cat";
-    std::cout << Color::CYAN << "Cat DEFAULT Constructed called" << Color::RESET
-              << std::endl;
+    std::cout << "Cat DEFAULT Constructed called" << std::endl;
 }
 
 Cat::Cat(const Cat& other) : Animal(other) {
-    std::cout << Color::CYAN << "Cat COPY Constructed called" << Color::RESET
-              << std::endl;
+    std::cout << "Cat COPY Constructed called" << std::endl;
 }
 
 Cat& Cat::operator=(const Cat& other) {
-    std::cout << Color::CYAN << "Cat COPY ASSIGN OP called" << Color::RESET
-              << std::endl;
+    std::cout << "Cat COPY ASSIGN OP called" << std::endl;
     if (this != &other) {
         Animal::operator=(other);
     }
     return *this;
 }
 
-Cat::~Cat() {
-    std::cout << Color::CYAN << "Cat DESTRUCTOR called" << Color::RESET
-              << std::endl;
-}
+Cat::~Cat() { std::cout << "Cat DESTRUCTOR called" << std::endl; }
 
 /* ************************************************************************** */
 /* */

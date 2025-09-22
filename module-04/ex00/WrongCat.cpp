@@ -1,5 +1,4 @@
 #include "WrongCat.hpp"
-#include "Animal.hpp"
 #include "WrongAnimal.hpp"
 
 #include <iostream>
@@ -11,18 +10,15 @@
 /* ************************************************************************** */
 WrongCat::WrongCat() {
     type = "WrongCat";
-    std::cout << Color::CYAN << "WrongCat DEFAULT Constructed called"
-              << Color::RESET << std::endl;
+    std::cout << "WrongCat DEFAULT Constructed called" << std::endl;
 }
 
 WrongCat::WrongCat(const WrongCat& other) : WrongAnimal(other) {
-    std::cout << Color::CYAN << "WrongCat COPY Constructed called"
-              << Color::RESET << std::endl;
+    std::cout << "WrongCat COPY Constructed called" << std::endl;
 }
 
 WrongCat& WrongCat::operator=(const WrongCat& other) {
-    std::cout << Color::CYAN << "WrongCat COPY ASSIGN OP called" << Color::RESET
-              << std::endl;
+    std::cout << "WrongCat COPY ASSIGN OP called" << std::endl;
     if (this != &other) {
         WrongAnimal::operator=(other);
     }
@@ -30,8 +26,7 @@ WrongCat& WrongCat::operator=(const WrongCat& other) {
 }
 
 WrongCat::~WrongCat() {
-    std::cout << Color::CYAN << "WrongCat DESTRUCTOR called" << Color::RESET
-              << std::endl;
+    std::cout << "WrongCat DESTRUCTOR called" << std::endl;
 }
 
 /* ************************************************************************** */
