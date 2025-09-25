@@ -1,8 +1,7 @@
 #include "../include/Bureaucrat.hpp"
-#include <iostream>
 
 /* -------------------- Orthodox Canonical Class Form ------------------ */
-Bureaucrat::Bureaucrat() : _name(""), _grade(150) {
+Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {
     std::cout << "Default constructor called" << std::endl;
     return;
 }
@@ -25,11 +24,12 @@ Bureaucrat::~Bureaucrat() {
 }
 
 /* -------------------- Constructor with Parameter ------------------ */
-Bureaucrat::Bureaucrat(const std::string name, unsigned int grade)
+Bureaucrat::Bureaucrat(const std::string name, int grade)
     : _name(name), _grade(grade) {
-    std::cout << "Parameter constructor called" << std::endl;
     if (grade < 1) throw GradeTooHighException();
     if (grade > 150) throw GradeTooLowException();
+
+    std::cout << "Parameter constructor called" << std::endl;
     return;
 }
 
@@ -53,6 +53,11 @@ void Bureaucrat::decrementGrade() {
     _grade++;
 }
 
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj) {
+    os << obj.getName() << ", bureaucrat grade " << obj.getGrade() << ".";
+    return os;
+}
+
 /* -------------------- Getters & Setters ------------------ */
 std::string Bureaucrat::getName() const { return _name; }
-unsigned int Bureaucrat::getGrade() const { return _grade; }
+int Bureaucrat::getGrade() const { return _grade; }
