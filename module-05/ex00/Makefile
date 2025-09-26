@@ -23,6 +23,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo "Compiling $<..."
 	@$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 
+debug: CXXFLAGS += -DDEBUG
+debug: all
+	@echo "Debug mode enabled with -DDEBUG flag! 🔍"
+
 clean:
 	@echo "Cleaning object files..."
 	@rm -rf $(OBJ_DIR)
@@ -33,4 +37,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all debug clean fclean re

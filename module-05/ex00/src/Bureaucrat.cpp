@@ -2,34 +2,31 @@
 
 /* -------------------- Orthodox Canonical Class Form ------------------ */
 Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {
-    std::cout << "Default constructor called" << std::endl;
+    DEBUG_LOG("Default constructor called");
     return;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other)
     : _name(other._name), _grade(other._grade) {
-    std::cout << "Copy constructor called for " << _name << std::endl;
+    DEBUG_LOG("Copy constructor called for " + _name);
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
     if (this != &other) {
-        std::cout << "Assignment operator called for " << _name << std::endl;
+        DEBUG_LOG("Assignment operator called for " + _name);
+        _grade = other._grade;
     }
-    _grade = other._grade;
     return *this;
 }
 
-Bureaucrat::~Bureaucrat() {
-    std::cout << "Destructor called for " << _name << std::endl;
-}
+Bureaucrat::~Bureaucrat() { DEBUG_LOG("Destructor called for " + _name); }
 
 /* -------------------- Constructor with Parameter ------------------ */
 Bureaucrat::Bureaucrat(const std::string name, int grade)
     : _name(name), _grade(grade) {
     if (grade < 1) throw GradeTooHighException();
     if (grade > 150) throw GradeTooLowException();
-
-    std::cout << "Parameter constructor called" << std::endl;
+    DEBUG_LOG("Parameter constructor called");
     return;
 }
 

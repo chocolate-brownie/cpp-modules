@@ -27,12 +27,11 @@ int main(void) {
     }
 
     std::cout << "----------------------------------------------" << std::endl;
-    std::cout << "$$inrementGrade() with a valid ranking$$" << std::endl;
+    std::cout << "$$incrementGrade() with a valid ranking$$" << std::endl;
     try {
         Bureaucrat allenDulles("Allen Dulles", 6);
 
-        int grade = allenDulles.getGrade();
-        while (grade--) {
+        while (allenDulles.getGrade() > 1) {
             allenDulles.incrementGrade();
             std::cout << allenDulles << std::endl;
         }
@@ -44,12 +43,11 @@ int main(void) {
     }
 
     std::cout << "----------------------------------------------" << std::endl;
-    std::cout << "$$inrementGrade() with a invalid ranking$$" << std::endl;
+    std::cout << "$$incrementGrade() with a invalid ranking$$" << std::endl;
     try {
         Bureaucrat lawrenceEeagle("Lawrence Eagleburger", 123879);
 
-        int grade = lawrenceEeagle.getGrade();
-        while (--grade) {
+        while (lawrenceEeagle.getGrade() > 1) {
             lawrenceEeagle.incrementGrade();
             std::cout << lawrenceEeagle << std::endl;
         }

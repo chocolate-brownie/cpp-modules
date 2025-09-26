@@ -5,6 +5,12 @@
 #include <iostream>
 #include <string>
 
+#ifdef DEBUG
+#define DEBUG_LOG(msg) std::cout << msg << std::endl
+#else
+#define DEBUG_LOG(msg)
+#endif
+
 class Bureaucrat {
   private:
     const std::string _name;
