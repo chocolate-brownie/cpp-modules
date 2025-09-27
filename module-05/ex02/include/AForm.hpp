@@ -2,6 +2,7 @@
 #define FORM_HPP
 
 #include "Bureaucrat.hpp"
+#include <exception>
 #include <string>
 
 class AForm {
@@ -13,30 +14,37 @@ class AForm {
     const std::string _target;
 
   public:
+    /*----- Member methods -----*/
+    virtual void execute(Bureaucrat const& executor) const = 0;
+    void beSigned(const Bureaucrat& bureaucrat);
     AForm(std::string name, int gradeToSign, int gradeToExec,
           std::string target);
-    void beSigned(const Bureaucrat& bureaucrat);
 
+    /*----- Getters -----*/
     std::string getName() const;
     bool getIsSigned() const;
     int getGradeToSign() const;
     int getGradeToExecute() const;
     std::string getTarget() const;
 
+    /*----- OCF -----*/
     AForm();
     AForm(const AForm& other);
     AForm& operator=(const AForm& other);
-
-    // This makes the class abstract!
-    virtual void execute(Bureaucrat const& executor) const = 0;
     virtual ~AForm();
 
+    /*----- Exceptions -----*/
     class GradeTooHighException : public std::exception {
       public:
         virtual const char* what() const throw();
     };
 
     class GradeTooLowException : public std::exception {
+      public:
+        virtual const char* what() const throw();
+    };
+
+    class FormNotSignedException : public std::exception {
       public:
         virtual const char* what() const throw();
     };

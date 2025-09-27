@@ -17,6 +17,7 @@ std::string AForm::getName() const { return _name; }
 bool AForm::getIsSigned() const { return _isSigned; }
 int AForm::getGradeToSign() const { return _gradeToSign; }
 int AForm::getGradeToExecute() const { return _gradeToExec; }
+std::string AForm::getTarget() const { return _target; }
 
 /* -------------------- Exception throws ------------------ */
 const char* AForm::GradeTooHighException::what() const throw() {
@@ -27,10 +28,15 @@ const char* AForm::GradeTooLowException::what() const throw() {
     return "Grade is too low (must be <= 150)";
 }
 
+const char* AForm::FormNotSignedException::what() const throw() {
+    return "Form is not signed!";
+}
+
 /* -------------------- Param constructor ------------------ */
-AForm::AForm(std::string name, int gradeToSign, int gradeToExec)
+AForm::AForm(std::string name, int gradeToSign, int gradeToExec,
+             std::string target)
     : _name(name), _isSigned(false), _gradeToSign(gradeToSign),
-      _gradeToExec(gradeToExec) {
+      _gradeToExec(gradeToExec), _target(target) {
     DEBUG_LOG("AForm param constructor called");
     if (gradeToSign < 1 || gradeToExec < 1) {
         throw AForm::GradeTooHighException();
@@ -42,14 +48,16 @@ AForm::AForm(std::string name, int gradeToSign, int gradeToExec)
 
 /* -------------------- OCF functions ------------------ */
 AForm::AForm()
-    : _name("default"), _isSigned(false), _gradeToSign(0), _gradeToExec(0) {
+    : _name(""), _isSigned(false), _gradeToSign(0), _gradeToExec(0),
+      _target("") {
     DEBUG_LOG("AForm default constructor called");
     return;
 }
 
 AForm::AForm(const AForm& other)
     : _name(other._name), _isSigned(other._isSigned),
-      _gradeToSign(other._gradeToSign), _gradeToExec(other._gradeToExec) {
+      _gradeToSign(other._gradeToSign), _gradeToExec(other._gradeToExec),
+      _target(other._target) {
     DEBUG_LOG("AForm copy constructor called");
     return;
 }
