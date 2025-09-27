@@ -1,5 +1,5 @@
 #include "../include/Bureaucrat.hpp"
-#include "../include/Form.hpp"
+#include "../include/AForm.hpp"
 
 /* -------------------- Orthodox Canonical Class Form ------------------ */
 Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {
@@ -41,11 +41,11 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
 }
 
 /* -------------------- Other member functions ------------------ */
-void Bureaucrat::signForm(Form& form) {
+void Bureaucrat::signForm(AForm& form) {
     try {
         form.beSigned(*this);
         std::cout << _name << " signed " << form.getName() << std::endl;
-    } catch (const Form::GradeTooLowException& e) {
+    } catch (const AForm::GradeTooLowException& e) {
         std::cout << _name << " couldn't signed " << form.getName()
                   << " beacuse " << e.what() << std::endl;
     }

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-class Form;
+class AForm;
 
 #ifdef DEBUG
 #define DEBUG_LOG(msg) std::cout << msg << std::endl
@@ -31,7 +31,8 @@ class Bureaucrat {
 
     void incrementGrade();
     void decrementGrade();
-    void signForm(Form& form);
+    void signForm(AForm& form);
+    void executeForm(AForm const& form);
 
     class GradeTooHighException : public std::exception {
       public:

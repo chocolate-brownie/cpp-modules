@@ -4,27 +4,32 @@
 #include "Bureaucrat.hpp"
 #include <string>
 
-class Form {
+class AForm {
   private:
     const std::string _name;
     bool _isSigned;
     const int _gradeToSign;
     const int _gradeToExec;
+    const std::string _target;
 
   public:
-    Form();
-    Form(const Form& other);
-    Form& operator=(const Form& other);
-    ~Form();
-
-    Form(std::string name, int gradeToSign, int gradeToExec);
+    AForm(std::string name, int gradeToSign, int gradeToExec,
+          std::string target);
+    void beSigned(const Bureaucrat& bureaucrat);
 
     std::string getName() const;
     bool getIsSigned() const;
     int getGradeToSign() const;
     int getGradeToExecute() const;
+    std::string getTarget() const;
 
-    void beSigned(const Bureaucrat& bureaucrat);
+    AForm();
+    AForm(const AForm& other);
+    AForm& operator=(const AForm& other);
+
+    // This makes the class abstract!
+    virtual void execute(Bureaucrat const& executor) const = 0;
+    virtual ~AForm();
 
     class GradeTooHighException : public std::exception {
       public:
@@ -37,6 +42,6 @@ class Form {
     };
 };
 
-std::ostream& operator<<(std::ostream& os, const Form& obj);
+std::ostream& operator<<(std::ostream& os, const AForm& obj);
 
 #endif
