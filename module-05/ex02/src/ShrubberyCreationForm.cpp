@@ -22,20 +22,26 @@ void ShrubberyCreationForm::execute(Bureaucrat const& executor) const {
     outFile << "   /\\*\\O\\*\\   " << std::endl;
     outFile << "  /\\O\\*\\O\\*\\  " << std::endl;
     outFile << " /\\*\\O\\*\\O\\*\\ " << std::endl;
-    outFile << "      ||      " << std::endl;
-    outFile << "      ||      " << std::endl;
+    outFile << "        ||      " << std::endl;
+    outFile << "        ||      " << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm() {
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+    : AForm("Shrubbery Creation Form", 145, 137, target) {
+    DEBUG_LOG("ShrubberyCreationForm param constructor called");
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm::AForm() {
     DEBUG_LOG("ShrubberyCreationForm default constructor called");
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(
-    const ShrubberyCreationForm& other) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
+    : AForm(other) {
     DEBUG_LOG("ShrubberyCreationForm copy constructor called");
 }
 ShrubberyCreationForm&
 ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other) {
+    if (this != &other) { AForm::operator=(other); }
     DEBUG_LOG("ShrubberyCreationForm assignment operator constructor called");
     return *this;
 }

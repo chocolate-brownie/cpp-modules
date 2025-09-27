@@ -6,7 +6,7 @@ SRC_DIR		= src
 OBJ_DIR		= build
 INC_DIR		= include
 
-SRCS		= main.cpp Bureaucrat.cpp AForm.cpp \
+SRCS		= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm\
 
 OBJS		= $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(addprefix $(SRC_DIR)/, $(SRCS)))
 
