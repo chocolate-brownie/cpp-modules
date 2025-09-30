@@ -16,7 +16,7 @@ void RobotomyRequestForm::execute(Bureaucrat const& executor) const {
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target)
-    : AForm("Robotomy Request Form:", 72, 45, target) {
+    : AForm("Robotomy Request Form", 72, 45, target) {
     DEBUG_LOG("RobotomyRequestForm param constructor called");
 }
 

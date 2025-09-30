@@ -9,7 +9,7 @@
 int main() {
     std::srand(std::time(0));
 
-    ShrubberyCreationForm shrubForm("Graden"); // Sign: 145, Exec: 137
+    ShrubberyCreationForm shrubForm("garden"); // Sign: 145, Exec: 137
     std::cout << shrubForm << std::endl;
 
     RobotomyRequestForm robReqForm("Optimus Prime"); // Sign: 72, Exec 45
@@ -28,11 +28,29 @@ int main() {
 
     std::cout << GREEN << "Sign but execute with low grade" << RESET
               << std::endl;
-    midGrade.signForm(robReqForm);    // can sign
-    midGrade.executeForm(robReqForm); // but cannot execute
-    highGrade.executeForm(robReqForm);
-    highGrade.signForm(robReqForm);
-    highGrade.executeForm(robReqForm);
+    highGrade.signForm(robReqForm);    // can sign
+    midGrade.executeForm(robReqForm);  // but cannot execute
+    highGrade.executeForm(robReqForm); // midGrade already signed!
+    std::cout << BOLD_WHITE << "----------------------" << RESET << std::endl;
+
+    std::cout << BOLD_WHITE << "----------------------" << RESET << std::endl;
+    RobotomyRequestForm newUnsignedDoc("Unsigned doc");
+    std::cout << newUnsignedDoc << std::endl;
+
+    std::cout << YELLOW << highGrade.getName() << " trying to execute the "
+              << newUnsignedDoc.getName() << "." << RESET << std::endl;
+    highGrade.executeForm(newUnsignedDoc);
+
+    std::cout << RED << lowGrade.getName() << " trying to sign the "
+              << newUnsignedDoc.getName() << "." << RESET << std::endl;
+    lowGrade.signForm(newUnsignedDoc);
+
+    std::cout << YELLOW << midGrade.getName() << " trying to sign the "
+              << newUnsignedDoc.getName() << "." << RESET << std::endl;
+    midGrade.signForm(newUnsignedDoc);
+    midGrade.executeForm(newUnsignedDoc);
+    highGrade.executeForm(newUnsignedDoc);
+    std::cout << BOLD_WHITE << "----------------------" << RESET << std::endl;
 
     return 0;
 }

@@ -4,24 +4,26 @@
 
 /* -------------------- Orthodox Canonical Class Form ------------------ */
 Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {
-    DEBUG_LOG("Default constructor called");
+    DEBUG_LOG("Bureaucrat Default constructor called");
     return;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other)
     : _name(other._name), _grade(other._grade) {
-    DEBUG_LOG("Copy constructor called for " + _name);
+    DEBUG_LOG("Bureaucrat Copy constructor called for " + _name);
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
     if (this != &other) {
-        DEBUG_LOG("Assignment operator called for " + _name);
+        DEBUG_LOG("Bureaucrat Assignment operator called for " + _name);
         _grade = other._grade;
     }
     return *this;
 }
 
-Bureaucrat::~Bureaucrat() { DEBUG_LOG("Destructor called for " + _name); }
+Bureaucrat::~Bureaucrat() {
+    DEBUG_LOG("Bureaucrat destructor called for " + _name);
+}
 
 /* -------------------- Constructor with Parameter ------------------ */
 Bureaucrat::Bureaucrat(const std::string name, int grade)
