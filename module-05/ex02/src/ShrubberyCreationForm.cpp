@@ -22,8 +22,8 @@ void ShrubberyCreationForm::execute(Bureaucrat const& executor) const {
     outFile << "   /\\*\\O\\*\\   " << std::endl;
     outFile << "  /\\O\\*\\O\\*\\  " << std::endl;
     outFile << " /\\*\\O\\*\\O\\*\\ " << std::endl;
-    outFile << "        ||      " << std::endl;
-    outFile << "        ||      " << std::endl;
+    outFile << "      ||      " << std::endl;
+    outFile << "      ||      " << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
