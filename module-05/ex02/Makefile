@@ -9,7 +9,8 @@ INC_DIR		= include
 SRCS		= main.cpp \
 			Bureaucrat.cpp \
 			AForm.cpp \
-			ShrubberyCreationForm.cpp
+			ShrubberyCreationForm.cpp \
+			RobotomyRequestForm.cpp
 
 OBJS		= $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(addprefix $(SRC_DIR)/, $(SRCS)))
 
