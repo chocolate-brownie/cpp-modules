@@ -1,5 +1,6 @@
 #include "../include/Bureaucrat.hpp"
 #include "../include/AForm.hpp"
+#include "../include/Colors.hpp"
 #include <exception>
 
 /* -------------------- Orthodox Canonical Class Form ------------------ */
@@ -47,21 +48,28 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
 void Bureaucrat::signForm(AForm& form) {
     try {
         form.beSigned(*this);
-        std::cout << _name << " signed " << form.getName() << std::endl;
-    } catch (const AForm::GradeTooLowException& e) {
-        std::cout << _name << " couldn't signed " << form.getName()
-                  << " beacuse " << e.what() << std::endl;
+        std::cout << BOLD_WHITE << this->getName() << " signed "
+                  << form.getName() << RESET << std::endl;
+    } catch (const AForm::FormAlreadySignedException& e) {
+        std::cout << BOLD_BLUE << this->getName() << " no need to sign again "
+                  << form.getName() << " because " << e.what() << RESET
+                  << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << RED << this->getName() << " couldn't sign "
+                  << form.getName() << " because " << e.what() << RESET
+                  << std::endl;
     }
 }
 
 void Bureaucrat::executeForm(AForm const& form) const {
     try {
         form.execute(*this);
-        std::cout << this->getName() << " executed " << form.getName()
-                  << std::endl;
+        std::cout << BOLD_GREEN << this->getName() << " executed "
+                  << form.getName() << RESET << std::endl;
     } catch (const std::exception& e) {
-        std::cout << this->getName() << " couldn't execute " << form.getName()
-                  << " because " << e.what() << std::endl;
+        std::cout << RED << this->getName() << " couldn't execute "
+                  << form.getName() << " because " << e.what() << RESET
+                  << std::endl;
     }
 }
 

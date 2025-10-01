@@ -1,6 +1,7 @@
 #include "../include/AForm.hpp"
 /* -------------------- Member functions ------------------ */
 void AForm::beSigned(const Bureaucrat& bureaucrat) {
+    if (_isSigned) { throw FormAlreadySignedException(); }
     if (bureaucrat.getGrade() > _gradeToSign) throw GradeTooLowException();
     _isSigned = true;
 }
@@ -30,6 +31,10 @@ const char* AForm::GradeTooLowException::what() const throw() {
 
 const char* AForm::FormNotSignedException::what() const throw() {
     return "Form is not signed!";
+}
+
+const char* AForm::FormAlreadySignedException::what() const throw() {
+    return "the form is already signed";
 }
 
 /* -------------------- Param constructor ------------------ */
