@@ -3,7 +3,7 @@ NAME = lessons
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I.
 
-SRCS =	InherShallow.cpp
+SRCS =	range.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
