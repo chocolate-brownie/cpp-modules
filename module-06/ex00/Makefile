@@ -7,7 +7,11 @@ OBJ_DIR		= build
 INC_DIR		= include
 
 SRCS		= main.cpp \
-			ScalarConverter.cpp
+			ScalarConverter.cpp \
+			handleChar.cpp \
+			handleInt.cpp \
+			handleFloat.cpp \
+			handleDouble.cpp \
 
 OBJS		= $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(addprefix $(SRC_DIR)/, $(SRCS)))
 

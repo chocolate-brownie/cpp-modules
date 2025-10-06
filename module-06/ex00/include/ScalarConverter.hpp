@@ -1,11 +1,11 @@
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
+#include <cctype>
+#include <climits>
+#include <cstdlib>
 #include <exception>
 #include <string>
-
-#define PSEUDOLIT_POS 1
-#define PSEUDOLIT_NEG 2
 /*
 * static_cast: You are performing a sensible, compile-time-checked conversion.
 
@@ -30,13 +30,14 @@ class ScalarConverter {
     static bool isIntLiteral(const std::string& s, int& parsedInt);
     static void intToOthers(int nbr);
 
-    // static int isFloatPseudoLiterals(const std::string& s);
-    // static int isFloatLiterals(const std::string& s);
-    // static void floatToOthers(const std::string& fNbr);
+    static bool isFloatPseudoLiterals(const std::string& s, float& parsedFloat);
+    static void pseudoFloatToOthers(float nbr);
+    static bool isFloatLiterals(const std::string& s, float& parsedFloat);
+    static void floatToOthers(float nbr);
 
-    // static int isDoublePseudoLiterals(const std::string& s);
-    // static int isDoubleLiterals(const std::string& s);
-    // static void doubleToOthers(const std::string& dNbr);
+    static bool isDoublePseudoLiterals(const std::string& s,
+                                       double& parsedDouble);
+    static void pseudoDoubleToOthers(double nbr);
 
   public:
     static void convert(const std::string& str);
