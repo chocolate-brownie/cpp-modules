@@ -1,5 +1,10 @@
 #include "../include/ScalarConverter.hpp"
 /*
+Exercise 00 ("Conversion of scalar types") requires you to implement a class
+that converts a string representing a C++ literal into its value as four
+different scalar types: char, int, float, and double.
+
+-------------------------------------------------------------------------------
 * Character literals are always within single quotes, e.g., '*'.
 
 * Float literals end in 'f' or 'F' (e.g., "42.0f") and may also use "nanf" or
@@ -17,9 +22,9 @@ quotes (e.g., "0", "42").
 -> Type detection
 -> Conversion
 -> Error handling
+-------------------------------------------------------------------------------
 */
 
-/*------------------------ Main Converter Method ---------------------*/
 void ScalarConverter::convert(const std::string& str) {
     if (str.empty()) throw ScalarConverter::ParamCannotBeEmpty();
 
