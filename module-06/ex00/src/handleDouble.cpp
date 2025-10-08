@@ -50,7 +50,13 @@ void ScalarConverter::doubleToOthers(double nbr) {
         std::cout << "char: Non displayable" << std::endl;
     }
 
-    std::cout << "int: " << static_cast<int>(nbr) << std::endl;
+    if (nbr >= std::numeric_limits<int>::min() &&
+        nbr <= std::numeric_limits<int>::max()) {
+        std::cout << "int: " << static_cast<int>(nbr) << std::endl;
+    } else {
+        std::cout << "int: impossible" << std::endl;
+    }
+
     std::cout << "float: " << std::fixed << std::setprecision(1)
               << static_cast<float>(nbr) << "f" << std::endl;
     std::cout << "double: " << static_cast<double>(nbr) << std::endl;
