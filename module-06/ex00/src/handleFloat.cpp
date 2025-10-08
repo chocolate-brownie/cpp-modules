@@ -1,4 +1,5 @@
 #include "../include/ScalarConverter.hpp"
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 #include <limits>
@@ -34,12 +35,25 @@ void ScalarConverter::pseudoFloatToOthers(float nbr) {
 
 bool ScalarConverter::isFloatLiterals(const std::string& s,
                                       float& parsedFloat) {
-    (void)s;
-    (void)parsedFloat;
+    char* endptr = NULL;
+    parsedFloat = strtof(s.c_str(), &endptr);
+
+    if (endptr == s.c_str()) { return false; }
+    if (*endptr != 'f' && *endptr != 'F') { return false; }
+    if (*(endptr + 1) != '\0') { return false; }
+
     return true;
 }
 
 void ScalarConverter::floatToOthers(float nbr) {
-    (void)nbr;
-    return;
+    if (isprint(static_cast<unsigned char>(nbr))) {
+        std::cout << "char: '" << static_cast<char>(nbr) << "'" << std::endl;
+    } else {
+        std::cout << "char: Non displayable" << std::endl;
+    }
+
+    std::cout << "int: " << static_cast<int>(nbr) << std::endl;
+    std::cout << "float: " << std::fixed << std::setprecision(1)
+              << static_cast<float>(nbr) << "f" << std::endl;
+    std::cout << "double: " << static_cast<double>(nbr) << std::endl;
 }

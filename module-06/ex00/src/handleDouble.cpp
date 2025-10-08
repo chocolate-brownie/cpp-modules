@@ -21,12 +21,36 @@ bool ScalarConverter::isDoublePseudoLiterals(const std::string& s,
             }
         }
     }
-    return 0;
+    return false;
 }
 
 void ScalarConverter::pseudoDoubleToOthers(double nbr) {
     std::cout << "char: Impossible" << std::endl;
     std::cout << "int: Impossible" << std::endl;
+    std::cout << "float: " << std::fixed << std::setprecision(1)
+              << static_cast<float>(nbr) << "f" << std::endl;
+    std::cout << "double: " << static_cast<double>(nbr) << std::endl;
+}
+
+bool ScalarConverter::isDoubleLiterals(const std::string& s,
+                                       double& parsedDouble) {
+    char* endptr = NULL;
+    parsedDouble = strtod(s.c_str(), &endptr);
+
+    if (endptr == s.c_str()) { return false; }
+    if (*endptr != '\0') { return false; }
+
+    return true;
+}
+
+void ScalarConverter::doubleToOthers(double nbr) {
+    if (isprint(static_cast<unsigned char>(nbr))) {
+        std::cout << "char: '" << static_cast<char>(nbr) << "'" << std::endl;
+    } else {
+        std::cout << "char: Non displayable" << std::endl;
+    }
+
+    std::cout << "int: " << static_cast<int>(nbr) << std::endl;
     std::cout << "float: " << std::fixed << std::setprecision(1)
               << static_cast<float>(nbr) << "f" << std::endl;
     std::cout << "double: " << static_cast<double>(nbr) << std::endl;

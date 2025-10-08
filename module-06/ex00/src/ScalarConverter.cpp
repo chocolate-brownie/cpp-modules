@@ -1,5 +1,4 @@
 #include "../include/ScalarConverter.hpp"
-#include <execution>
 /*
 * Character literals are always within single quotes, e.g., '*'.
 
@@ -26,6 +25,7 @@ void ScalarConverter::convert(const std::string& str) {
 
     int parsedInt = 0;
     float parsedFloat = 0;
+    double parsedDouble = 0;
 
     if (isCharLiteral(str)) {
         charToOthers(str[1]);
@@ -33,8 +33,14 @@ void ScalarConverter::convert(const std::string& str) {
         intToOthers(parsedInt);
     } else if (isFloatPseudoLiterals(str, parsedFloat)) {
         pseudoFloatToOthers(parsedFloat);
+    } else if (isFloatLiterals(str, parsedFloat)) {
+        floatToOthers(parsedFloat);
+    } else if (isDoublePseudoLiterals(str, parsedDouble)) {
+        pseudoDoubleToOthers(parsedDouble);
+    } else if (isDoubleLiterals(str, parsedDouble)) {
+        doubleToOthers(parsedDouble);
     } else {
-        throw ScalarConverter::CharNonDisplayable();
+        throw ScalarConverter::InvalidLiteralException();
     }
     return;
 }
@@ -44,6 +50,7 @@ const char* ScalarConverter::ParamCannotBeEmpty::what() const throw() {
     return "\"str\" parameter cannot be empty!";
 }
 
-const char* ScalarConverter::CharNonDisplayable::what() const throw() {
-    return "char: Non displayable";
+const char* ScalarConverter::InvalidLiteralException::what() const throw() {
+    return "The input is not a valid char, int, float, or double "
+           "literal.";
 }

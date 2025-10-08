@@ -38,6 +38,8 @@ class ScalarConverter {
     static bool isDoublePseudoLiterals(const std::string& s,
                                        double& parsedDouble);
     static void pseudoDoubleToOthers(double nbr);
+    static bool isDoubleLiterals(const std::string& s, double& parsedDouble);
+    static void doubleToOthers(double nbr);
 
   public:
     static void convert(const std::string& str);
@@ -47,7 +49,7 @@ class ScalarConverter {
         virtual const char* what() const throw();
     };
 
-    class CharNonDisplayable : public std::exception {
+    class InvalidLiteralException : public std::exception {
       public:
         virtual const char* what() const throw();
     };
