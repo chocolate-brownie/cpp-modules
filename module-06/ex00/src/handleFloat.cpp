@@ -35,10 +35,26 @@ void ScalarConverter::pseudoFloatToOthers(float nbr) {
 
 bool ScalarConverter::isFloatLiterals(const std::string& s,
                                       float& parsedFloat) {
+    /* --- Bug Fix 1: Reject strings containing "nan" or "inf" ---
+    This prevents "+nanf" from being partially parsed as a valid number. */
+    if (s.find("nan") != std::string::npos ||
+        s.find("inf") != std::string::npos) {
+        return false;
+    }
+
     char* endptr = NULL;
     parsedFloat = strtof(s.c_str(), &endptr);
 
     if (endptr == s.c_str()) { return false; }
+
+    /* --- Bug Fix 2: Ensure a digit follows a decimal point ---
+    This invalidates inputs like "42.f" */
+    size_t pos = s.find('.');
+    if (pos != std::string::npos) { // If a decimal point exists...
+        // ...check if the character right after it is a digit.
+        if (!isdigit(s[pos + 1])) { return false; }
+    }
+
     if (*endptr != 'f' && *endptr != 'F') { return false; }
     if (*(endptr + 1) != '\0') { return false; }
 
