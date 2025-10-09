@@ -7,6 +7,7 @@ OBJ_DIR		= build
 INC_DIR		= include
 
 SRCS		= main.cpp \
+			Serializer.cpp \
 
 OBJS		= $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(addprefix $(SRC_DIR)/, $(SRCS)))
 

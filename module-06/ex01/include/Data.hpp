@@ -3,16 +3,12 @@
 
 #include <string>
 
-class Data {
-  private:
-    Data();
-    Data(const Data&);
-    Data& operator=(const Data&);
-    ~Data();
-
-  public:
-    std::string s1;
-    int n;
+// This structure is a simple container for data.
+// Its only purpose is to be the target for our serialization and
+// deserialization test.
+struct Data {
+    std::string name;
+    int value;
 };
 
 #endif
