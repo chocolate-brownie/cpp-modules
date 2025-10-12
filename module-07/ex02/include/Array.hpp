@@ -1,7 +1,9 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
+#define TITLE(msg) std::cout << "\n--- " << msg << " ---" << std::endl
 
 #include <cstdlib>
+#include <exception>
 
 template <typename T> class Array {
   private:
@@ -10,7 +12,8 @@ template <typename T> class Array {
 
   public:
     Array() : _array(NULL), _size(0) {}
-    Array(unsigned int size) : _array(NULL), _size(size) {}
+    ~Array() { delete[] _array; }
+    Array(unsigned int size) : _array(new T[size]), _size(size) {}
 
     Array(const Array& other) : _array(NULL), _size(other._size) {
         if (_size > 0) {
@@ -46,7 +49,17 @@ template <typename T> class Array {
         return *this;
     }
 
-    ~Array() { delete[] _array; }
+    T& operator[](unsigned int i) {
+        if (i >= _size) { throw std::exception(); }
+        return _array[i];
+    }
+
+    const T& operator[](unsigned int i) const {
+        if (i >= _size) { throw std::exception(); }
+        return _array[i];
+    }
+
+    unsigned int size() const { return _size; }
 };
 
 #endif
