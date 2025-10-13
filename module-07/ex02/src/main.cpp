@@ -1,6 +1,8 @@
 #include "../include/Array.hpp"
 #include <iostream>
 
+#define TITLE(msg) std::cout << "\n--- " << msg << " ---" << std::endl
+
 int main() {
     TITLE("Test 1: Sized constructor and writing/reading elements");
     Array<int> numbers(5);

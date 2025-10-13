@@ -1,6 +1,5 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
-#define TITLE(msg) std::cout << "\n--- " << msg << " ---" << std::endl
 
 #include <cstdlib>
 #include <exception>
