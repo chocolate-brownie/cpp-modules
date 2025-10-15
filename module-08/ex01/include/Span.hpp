@@ -12,12 +12,16 @@ class Span {
     std::vector<unsigned int>::iterator maxIt;
 
   public:
-    void addNumber(unsigned int value);
     template <typename InputIterator>
     void addNumbers(InputIterator begin, InputIterator end) {
-        if (std::distance(begin, end) > (maxCapacity - vec.size()))
+        if (std::distance(begin, end) > static_cast<long int>(maxCapacity - vec.size()))
             throw InvalidContainerSize();
-        vec.insert(vec.end(), begin, end);
+
+        /* The third argument, std::back_inserter(vec), is an output iterator. Its job is
+        to tell the std::copy algorithm where to place the copied elements.
+        Specifically, it adapts the vec container so that std::copy effectively calls
+        vec.push_back() for each element it copies. */
+        std::copy(begin, end, std::back_inserter(vec));
     }
 
     /* ---- Analogy: Runners in a Race 🏃‍♀️ ----
@@ -28,6 +32,7 @@ class Span {
 
     shortestSpan() tells you the distance between the two runners who are closest
     together, no matter where they are in the pack. */
+    void addNumber(unsigned int value);
     unsigned int shortestSpan();
     unsigned int longestSpan();
 

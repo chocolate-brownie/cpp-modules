@@ -35,7 +35,10 @@ void Span::addNumber(unsigned int value) {
     vec.push_back(value);
 }
 
-unsigned int Span::longestSpan() { return *getMaxIt() - *getMinIt(); }
+unsigned int Span::longestSpan() {
+    if (vec.size() < 2) throw InvalidContainerSize();
+    return *getMaxIt() - *getMinIt();
+}
 
 unsigned int Span::shortestSpan() {
     if (vec.size() < 2) throw InvalidContainerSize();
