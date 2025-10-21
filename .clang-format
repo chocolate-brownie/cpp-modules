@@ -1,9 +1,35 @@
+# This file is based on Google's C++ style guide, with the customizations below.
 BasedOnStyle: Google
-Standard: C++03
-IndentWidth: 4
-ColumnLimit: 90
+Language:     Cpp
+
+# NOTE: c++03 is an old standard. It's highly recommended to use a more
+# modern standard like 'c++17' or 'c++20' for new projects.
+Standard: c++03
+
+# --- Key Deviations from Standard Google Style ---
+
+# A common preference for more compact code blocks. Google's style is 'false'.
 AllowShortIfStatementsOnASingleLine: true
-AllowShortBlocksOnASingleLine: Always
-AllowShortLoopsOnASingleLine: true
-DerivePointerAlignment: false
-PointerAlignment: Left
+AllowShortLoopsOnASingleLine:      true
+AllowShortBlocksOnASingleLine:     Always
+
+# Only allow inline lambdas on a single line. Google's default is 'All'.
+AllowShortLambdasOnASingleLine: Inline
+
+# Outdent access modifiers (public:, private:) relative to the class body.
+AccessModifierOffset: -1
+
+# Don't allow a function's parameters to all be pushed to the next line.
+AllowAllParametersOfDeclarationOnNextLine: false
+
+# Always break after the 'template' keyword for multi-line declarations.
+AlwaysBreakTemplateDeclarations: Yes
+
+# Indent 'case' statements within a 'switch' block. Google style does not.
+IndentCaseLabels: true
+
+# Prevent clang-format from re-wrapping comments to fit the column limit.
+ReflowComments: true
+
+# Use two spaces before a trailing comment. Google's default is 1.
+SpacesBeforeTrailingComments: 2
