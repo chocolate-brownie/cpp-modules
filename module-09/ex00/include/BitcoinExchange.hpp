@@ -25,22 +25,24 @@ standard output 2011-01-03 => 3 = 0.9
 #include <sstream>  // IWYU pragma: keep
 #include <string>
 
+#include "BitcoinExchangeException.hpp"  // IWYU pragma: keep
+
 class BitCoinExchange {
- private:
-  std::map<std::string, double> _priceDatabase;
-  const std::string _dbFilePath;
+   private:
+    std::map<std::string, double> _priceDatabase;
+    std::map<std::string, double> _priceInputFile;
+    const std::string _dbFilePath;
 
-  void _parseLine(const std::string& line);
-  void _parseDbFile(const std::string& dbFilePath);
-  double _findPriceForData(const std::string& data);
+    void _parseDbFile(const std::string& dbFilePath);
+    double _findPriceForDate(const std::string& date) const;
 
- public:
-  void processInputFile(std::string fileName);
+   public:
+    void processInputFile(const std::string& filePath);
 
-  BitCoinExchange();
-  BitCoinExchange(const BitCoinExchange& other);
-  BitCoinExchange& operator=(const BitCoinExchange& other);
-  ~BitCoinExchange();
+    BitCoinExchange();
+    BitCoinExchange(const BitCoinExchange& other);
+    BitCoinExchange& operator=(const BitCoinExchange& other);
+    ~BitCoinExchange();
 };
 
 #endif

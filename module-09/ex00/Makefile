@@ -1,6 +1,6 @@
 NAME		= btc
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS 	= -Wall -Wextra -Werror -std=c++98 -g -O0
 
 SRC_DIR		= src
 OBJ_DIR		= build
@@ -10,6 +10,8 @@ SRCS		= main.cpp \
 			BitcoinExchange.cpp \
 			Exception.cpp \
 			parseDbFile.cpp \
+			processInputFile.cpp \
+			findPriceForDate.cpp \
 
 OBJS		= $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(addprefix $(SRC_DIR)/, $(SRCS)))
 

@@ -1,6 +1,9 @@
 # This file is based on Google's C++ style guide, with the customizations below.
 BasedOnStyle: Google
 Language:     Cpp
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
 
 # NOTE: c++03 is an old standard. It's highly recommended to use a more
 # modern standard like 'c++17' or 'c++20' for new projects.
