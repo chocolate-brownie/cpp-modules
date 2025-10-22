@@ -99,8 +99,6 @@ void BitCoinExchange::processInputFile(const std::string& filePath) {
             continue;
         }
 
-        if (!isValidValue(val)) { continue; }
-
         double price = BitCoinExchange::_findPriceForDate(date);
         std::cout << date << " => " << val << " = " << (val * price) << std::endl;
     }
