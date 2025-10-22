@@ -1,34 +1,58 @@
-# --- Valid Cases from Subject ---
+# --- Subject's cases ---
+
 2011-01-03 | 3
 2011-01-03 | 2
 2011-01-03 | 1.2
 2011-01-09 | 1
 2012-01-11 | 1
 
+
+
+
+
 # --- Custom Valid Cases ---
+
 # Tests the "closest earlier date" logic (2011-01-04 is not in data.csv)
 2011-01-04 | 10
+
 # Tests the lower boundary of the value
 2012-03-02 | 0
+
 # Tests the upper boundary of the value
 2012-03-05 | 1000
 
+
+
+
+
 # --- Error Cases from Subject ---
+
 # Bad format (no pipe)
 2011-01-03 1
+
 # Not a positive number
 2011-01-03 | -1
+
 # Bad date input
 2001-42-42
+
 # Too large a number
 2012-01-11 | 2147483647
 
+
+
+
+
 # --- Custom Error Cases ---
+
 # Invalid date (day 32)
 2022-01-32 | 50
+
 # Invalid date format
 2022/01/20 | 20
+
 # Non-numeric value
 2022-03-01 | forty-two
+
 # Missing value
 2022-03-02 |
