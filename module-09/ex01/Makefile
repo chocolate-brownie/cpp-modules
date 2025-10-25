@@ -1,4 +1,4 @@
-NAME		= RNP
+NAME		= RPN
 CXX			= c++
 CXXFLAGS 	= -Wall -Wextra -Werror -std=c++98 -g -O0
 
@@ -7,6 +7,7 @@ OBJ_DIR		= build
 INC_DIR		= include
 
 SRCS		= main.cpp \
+			ReversePolishNotation.cpp \
 
 OBJS		= $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(addprefix $(SRC_DIR)/, $(SRCS)))
 
