@@ -1,6 +1,7 @@
 #include "../include/BitcoinExchange.hpp"
 
-double BitCoinExchange::_findPriceForDate(const std::string& date) const {
+double BitCoinExchange::_findPriceForDate(const std::string& date) const
+{
     /* [NOTE] The lower_bound() member function in std::map is used to find the
      * position of the first element whose key is not less than (that is,
      * greater than or equal to) a given key. It returns an iterator to this
@@ -16,11 +17,12 @@ double BitCoinExchange::_findPriceForDate(const std::string& date) const {
      * and to get to the closest date regarding to the price you would have to
      get one step backwards. */
 
-    std::map<std::string, double>::const_iterator it =
-        _priceDatabase.lower_bound(date);
+    std::map<std::string, double>::const_iterator it = _priceDatabase.lower_bound(date);
 
-    if (it != _priceDatabase.end() && it->first == date) return it->second;
-    if (it == _priceDatabase.begin()) return it->second;
+    if (it != _priceDatabase.end() && it->first == date)
+        return it->second;
+    if (it == _priceDatabase.begin())
+        return it->second;
 
     --it;
     return it->second;

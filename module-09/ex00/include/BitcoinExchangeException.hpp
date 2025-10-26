@@ -5,14 +5,14 @@
 #include <string>
 
 class BitCoinExchangeException : public std::exception {
- private:
-  std::string _msg;
+private:
+    std::string _msg;
 
- public:
-  explicit BitCoinExchangeException(const std::string& message) throw();
-  virtual ~BitCoinExchangeException() throw();
+public:
+    explicit BitCoinExchangeException(const std::string& message) throw();
+    virtual ~BitCoinExchangeException() throw();
 
-  virtual const char* what() const throw();
+    virtual const char* what() const throw();
 };
 
 #endif

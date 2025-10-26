@@ -11,14 +11,14 @@
 #include <string>     // IWYU pragma: keep
 
 class ReversePolishNotation {
-   private:
+private:
     std::stack<int> st;
 
     void performRnp(const std::string& op);
     bool isOperator(const std::string& token) const;
     bool isValidNumString(const std::string& token, int& num) const;
 
-   public:
+public:
     ReversePolishNotation();
     ~ReversePolishNotation();
     ReversePolishNotation(const ReversePolishNotation& other);

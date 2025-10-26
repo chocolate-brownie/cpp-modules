@@ -1,38 +1,43 @@
-# This file is based on Google's C++ style guide, with the customizations below.
-BasedOnStyle: Google
-Language:     Cpp
-IndentWidth: 4
-TabWidth: 4
-UseTab: Never
+Language:        Cpp
+BasedOnStyle:    LLVM
+IndentWidth:     4
+TabWidth:        4
+UseTab:          Never
+Standard:        c++03
 
-# NOTE: c++03 is an old standard. It's highly recommended to use a more
-# modern standard like 'c++17' or 'c++20' for new projects.
-Standard: c++03
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass:             false
+  AfterControlStatement:  true
+  AfterEnum:              false
+  AfterFunction:          true
+  AfterNamespace:         false
+  AfterStruct:            false
+  AfterUnion:             false
+  AfterExternBlock:       false
+  BeforeElse:             true
+  IndentBraces:           false
 
-# --- Key Deviations from Standard Google Style ---
+AccessModifierOffset:     -4
+IndentCaseLabels:         true
+ConstructorInitializerIndentWidth: 4
 
-# A common preference for more compact code blocks. Google's style is 'false'.
-AllowShortIfStatementsOnASingleLine: true
-AllowShortLoopsOnASingleLine:      true
-AllowShortBlocksOnASingleLine:     Always
-
-# Only allow inline lambdas on a single line. Google's default is 'All'.
-AllowShortLambdasOnASingleLine: Inline
-
-# Outdent access modifiers (public:, private:) relative to the class body.
-AccessModifierOffset: -1
-
-# Don't allow a function's parameters to all be pushed to the next line.
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
 AllowAllParametersOfDeclarationOnNextLine: false
 
-# Always break after the 'template' keyword for multi-line declarations.
 AlwaysBreakTemplateDeclarations: Yes
-
-# Indent 'case' statements within a 'switch' block. Google style does not.
-IndentCaseLabels: true
-
-# Prevent clang-format from re-wrapping comments to fit the column limit.
-ReflowComments: true
-
-# Use two spaces before a trailing comment. Google's default is 1.
 SpacesBeforeTrailingComments: 2
+ReflowComments: true
+PointerAlignment: Left
+
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+SortIncludes: false
+IndentGotoLabels: true
+SpaceAfterCStyleCast: true
+AlignEscapedNewlines: Right
+ColumnLimit: 100
