@@ -37,13 +37,9 @@ bool PmergeMe::isValidUnsignedInt(int argc, char** argv)
     return true;
 }
 
-// void PmergeMe::compareAndPush() {
-//     if (a)
-// }
-
 void PmergeMe::processAndSort(int argc, char** argv)
 {
-    // go through the entire arguments and validate them
+    // Go through the entire arguments and validate them
     if (!isValidUnsignedInt(argc, argv))
         return;
 
@@ -59,8 +55,11 @@ void PmergeMe::processAndSort(int argc, char** argv)
 
 PmergeMe::PmergeMe() {}
 PmergeMe::~PmergeMe() {}
-// PmergeMe::PmergeMe(const PmergeMe& other) {}
-// PmergeMe& PmergeMe::operator=(const PmergeMe& other)
-// {
-//     return *this;
-// }
+
+/*
+PmergeMe::PmergeMe(const PmergeMe& other) {}
+PmergeMe& PmergeMe::operator=(const PmergeMe& other)
+{
+    return *this;
+}
+*/
