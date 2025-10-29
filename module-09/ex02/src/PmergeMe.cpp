@@ -29,7 +29,7 @@ bool PmergeMe::isValidUnsignedInt(int argc, char** argv)
             ++endptr;
 
         if (*endptr != '\0')
-            return false;
+            throw std::runtime_error("[Invalid Argument]: invalid characters in an argument");
 
         if (errno == ERANGE || ul > UINT_MAX)
             throw std::runtime_error("[Invalid Argument]: value overflow");
@@ -39,18 +39,21 @@ bool PmergeMe::isValidUnsignedInt(int argc, char** argv)
 
 void PmergeMe::processAndSort(int argc, char** argv)
 {
-    // Go through the entire arguments and validate them
+    // Go through the entire arguments and validate them before the compare and push
     if (!isValidUnsignedInt(argc, argv))
         return;
 
-    for (int i = 1; i < argc; i += 1)
-    {
+    /* Go through the argument, Items in the list are first grouped into pairs and compared; the
+     * larger item of each pair is collected into a “main chain” (sorted list).
+     [12, 32, 43, 2, 21, 39]
+     main chain -> [32, 43, 39]
+     */
 
-        std::cout << argv[i] << std::endl;
-        // a = static_cast<unsigned int>(std::strtoul(argv[i], NULL, 10));
-        // b = static_cast<unsigned int>(std::strtoul(argv[i + 1], NULL, 10));
-        // compareAndPush();
+    for (int i = 1; i + 1 < argc; i += 2)
+    {
     }
+
+
 }
 
 PmergeMe::PmergeMe() {}

@@ -75,13 +75,14 @@ and algorithmic guides.[1][2]
 
 class PmergeMe {
 private:
-    std::vector<unsigned int> main;
-    std::vector<unsigned int> pending;
-    unsigned int              a;
-    unsigned int              b;
+    std::vector<unsigned int> mainVec;
+    std::vector<unsigned int> pendingVec;
+
+    bool hasStraggler;
+    unsigned int straggler;
 
     bool isValidUnsignedInt(int argc, char** argv);
-    void compareAndPush();
+    unsigned int toUInt(const char* s);
 
 public:
     void processAndSort(int argc, char** argv);
