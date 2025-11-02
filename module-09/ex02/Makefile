@@ -8,6 +8,7 @@ INC_DIR		= include
 
 SRCS		= main.cpp \
 			PmergeMe.cpp \
+			utils.cpp \
 
 OBJS		= $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(addprefix $(SRC_DIR)/, $(SRCS)))
 
