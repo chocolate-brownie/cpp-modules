@@ -1,0 +1,12 @@
+# Ignore all .log files
+*.log
+
+# Ignore build directories
+build/
+tmp/
+
+# Ignore local config files
+.idea/
+.vscode/
+.zed/
+*.swp
