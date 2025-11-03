@@ -67,11 +67,12 @@ breakdowns at references like , or official algorithm descriptions on Wikipedia
 and algorithmic guides.[1][2]
 */
 #include <iostream>  // IWYU pragma: keep
-#include <vector>    // IWYU pragma: keep
-#include <cstdlib>   // IWYU pragma: keep
-#include <climits>   // IWYU pragma: keep
-#include <cerrno>    // IWYU pragma: keep
-#include <cctype>    // IWYU pragma: keep
+#include <utility>
+#include <vector>   // IWYU pragma: keep
+#include <cstdlib>  // IWYU pragma: keep
+#include <climits>  // IWYU pragma: keep
+#include <cerrno>   // IWYU pragma: keep
+#include <cctype>   // IWYU pragma: keep
 
 class PmergeMe {
 private:
@@ -82,7 +83,15 @@ private:
     bool         hasStraggler;
     unsigned int straggler;
 
-    bool         isValidUnsignedInt(int argc, char** argv);
+    bool isValidUnsignedInt(int argc, char** argv);
+    void makePairs(char** argv, int size);
+
+    void mergeInsertSortPairs(std::vector<std::pair<unsigned int, unsigned int> >& pairs,
+                              size_t left, size_t right);
+
+    // overload for a simple call
+    void mergeInsertSortPairs(std::vector<std::pair<unsigned int, unsigned int> >& pairs);
+
     unsigned int ft_strtoul(const char* s);
 
 public:
