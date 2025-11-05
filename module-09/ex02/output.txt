@@ -1,0 +1,245 @@
+Initial Pairs (Larger, Smaller):
+(167, 152) (89, 12) (71, 12) (90, 33) (876, 67) (768, 765) (909, 677) 
+
+runnign first call left:[0] right:[6]
+
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	6	pairs[6].first = 909	pairs[6].second = 677
+
+-------------------------------------------------------------
+mid:	3	pairs[3].first = 90	pairs[3].second = 33
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	3	pairs[3].first = 90	pairs[3].second = 33
+
+-------------------------------------------------------------
+mid:	1	pairs[1].first = 89	pairs[1].second = 12
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	1	pairs[1].first = 89	pairs[1].second = 12
+
+-------------------------------------------------------------
+mid:	0	pairs[0].first = 167	pairs[0].second = 152
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+Running: recursiveSortPair(pairs, mid + 1, right);
+Running: recursiveSortPair(pairs, mid + 1, right);
+left:	2	pairs[2].first = 71	pairs[2].second = 12
+right:	3	pairs[3].first = 90	pairs[3].second = 33
+
+-------------------------------------------------------------
+mid:	2	pairs[2].first = 71	pairs[2].second = 12
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+Running: recursiveSortPair(pairs, mid + 1, right);
+Running: recursiveSortPair(pairs, mid + 1, right);
+left:	4	pairs[4].first = 876	pairs[4].second = 67
+right:	6	pairs[6].first = 909	pairs[6].second = 677
+
+-------------------------------------------------------------
+mid:	5	pairs[5].first = 768	pairs[5].second = 765
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+left:	4	pairs[4].first = 876	pairs[4].second = 67
+right:	5	pairs[5].first = 768	pairs[5].second = 765
+
+-------------------------------------------------------------
+mid:	4	pairs[4].first = 876	pairs[4].second = 67
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+Running: recursiveSortPair(pairs, mid + 1, right);
+Running: recursiveSortPair(pairs, mid + 1, right);
+Initial Pairs (Larger, Smaller):
+(167, 152) (89, 12) (71, 12) (90, 33) (876, 67) (768, 765) (909, 677) 
+
+runnign first call left:[0] right:[6]
+
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	6	pairs[6].first = 909	pairs[6].second = 677
+
+-------------------------------------------------------------
+mid:	3	pairs[3].first = 90	pairs[3].second = 33
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	3	pairs[3].first = 90	pairs[3].second = 33
+
+-------------------------------------------------------------
+mid:	1	pairs[1].first = 89	pairs[1].second = 12
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	1	pairs[1].first = 89	pairs[1].second = 12
+
+-------------------------------------------------------------
+mid:	0	pairs[0].first = 167	pairs[0].second = 152
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	0	pairs[0].first = 167	pairs[0].second = 152
+Running: recursiveSortPair(pairs, mid + 1, right);
+left:	1	pairs[1].first = 89	pairs[1].second = 12
+right:	1	pairs[1].first = 89	pairs[1].second = 12
+Running: recursiveSortPair(pairs, mid + 1, right);
+left:	2	pairs[2].first = 71	pairs[2].second = 12
+right:	3	pairs[3].first = 90	pairs[3].second = 33
+
+-------------------------------------------------------------
+mid:	2	pairs[2].first = 71	pairs[2].second = 12
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+left:	2	pairs[2].first = 71	pairs[2].second = 12
+right:	2	pairs[2].first = 71	pairs[2].second = 12
+Running: recursiveSortPair(pairs, mid + 1, right);
+left:	3	pairs[3].first = 90	pairs[3].second = 33
+right:	3	pairs[3].first = 90	pairs[3].second = 33
+Running: recursiveSortPair(pairs, mid + 1, right);
+left:	4	pairs[4].first = 876	pairs[4].second = 67
+right:	6	pairs[6].first = 909	pairs[6].second = 677
+
+-------------------------------------------------------------
+mid:	5	pairs[5].first = 768	pairs[5].second = 765
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+left:	4	pairs[4].first = 876	pairs[4].second = 67
+right:	5	pairs[5].first = 768	pairs[5].second = 765
+
+-------------------------------------------------------------
+mid:	4	pairs[4].first = 876	pairs[4].second = 67
+-------------------------------------------------------------
+
+Running: recursiveSortPair(pairs, left, mid);
+left:	4	pairs[4].first = 876	pairs[4].second = 67
+right:	4	pairs[4].first = 876	pairs[4].second = 67
+Running: recursiveSortPair(pairs, mid + 1, right);
+left:	5	pairs[5].first = 768	pairs[5].second = 765
+right:	5	pairs[5].first = 768	pairs[5].second = 765
+Running: recursiveSortPair(pairs, mid + 1, right);
+left:	6	pairs[6].first = 909	pairs[6].second = 677
+right:	6	pairs[6].first = 909	pairs[6].second = 677
+Initial Pairs (Larger, Smaller):
+(167, 152) (89, 12) (71, 12) (90, 33) (876, 67) (768, 765) (909, 677) 
+
+runnign first call left:[0] right:[6]
+
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	6	pairs[6].first = 909	pairs[6].second = 677
+
+-------------------------------------------------------------
+mid:	3	pairs[3].first = 90	pairs[3].second = 33
+-------------------------------------------------------------
+
+[RUNNING]: recursiveSortPair(pairs, left, mid);
+
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	3	pairs[3].first = 90	pairs[3].second = 33
+
+-------------------------------------------------------------
+mid:	1	pairs[1].first = 89	pairs[1].second = 12
+-------------------------------------------------------------
+
+[RUNNING]: recursiveSortPair(pairs, left, mid);
+
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	1	pairs[1].first = 89	pairs[1].second = 12
+
+-------------------------------------------------------------
+mid:	0	pairs[0].first = 167	pairs[0].second = 152
+-------------------------------------------------------------
+
+[RUNNING]: recursiveSortPair(pairs, left, mid);
+
+left:	0	pairs[0].first = 167	pairs[0].second = 152
+right:	0	pairs[0].first = 167	pairs[0].second = 152
+
+left: 0 >= right: 0
+returning...
+
+[RUNNING]: recursiveSortPair(pairs, mid + 1, right);
+
+left:	1	pairs[1].first = 89	pairs[1].second = 12
+right:	1	pairs[1].first = 89	pairs[1].second = 12
+
+left: 1 >= right: 1
+returning...
+
+[RUNNING]: recursiveSortPair(pairs, mid + 1, right);
+
+left:	2	pairs[2].first = 71	pairs[2].second = 12
+right:	3	pairs[3].first = 90	pairs[3].second = 33
+
+-------------------------------------------------------------
+mid:	2	pairs[2].first = 71	pairs[2].second = 12
+-------------------------------------------------------------
+
+[RUNNING]: recursiveSortPair(pairs, left, mid);
+
+left:	2	pairs[2].first = 71	pairs[2].second = 12
+right:	2	pairs[2].first = 71	pairs[2].second = 12
+
+left: 2 >= right: 2
+returning...
+
+[RUNNING]: recursiveSortPair(pairs, mid + 1, right);
+
+left:	3	pairs[3].first = 90	pairs[3].second = 33
+right:	3	pairs[3].first = 90	pairs[3].second = 33
+
+left: 3 >= right: 3
+returning...
+
+[RUNNING]: recursiveSortPair(pairs, mid + 1, right);
+
+left:	4	pairs[4].first = 876	pairs[4].second = 67
+right:	6	pairs[6].first = 909	pairs[6].second = 677
+
+-------------------------------------------------------------
+mid:	5	pairs[5].first = 768	pairs[5].second = 765
+-------------------------------------------------------------
+
+[RUNNING]: recursiveSortPair(pairs, left, mid);
+
+left:	4	pairs[4].first = 876	pairs[4].second = 67
+right:	5	pairs[5].first = 768	pairs[5].second = 765
+
+-------------------------------------------------------------
+mid:	4	pairs[4].first = 876	pairs[4].second = 67
+-------------------------------------------------------------
+
+[RUNNING]: recursiveSortPair(pairs, left, mid);
+
+left:	4	pairs[4].first = 876	pairs[4].second = 67
+right:	4	pairs[4].first = 876	pairs[4].second = 67
+
+left: 4 >= right: 4
+returning...
+
+[RUNNING]: recursiveSortPair(pairs, mid + 1, right);
+
+left:	5	pairs[5].first = 768	pairs[5].second = 765
+right:	5	pairs[5].first = 768	pairs[5].second = 765
+
+left: 5 >= right: 5
+returning...
+
+[RUNNING]: recursiveSortPair(pairs, mid + 1, right);
+
+left:	6	pairs[6].first = 909	pairs[6].second = 677
+right:	6	pairs[6].first = 909	pairs[6].second = 677
+
+left: 6 >= right: 6
+returning...
+

@@ -9,7 +9,7 @@ INC_DIR		= include
 SRCS		= main.cpp \
 			PmergeMe.cpp \
 			pmergeMeUtils.cpp \
-			mergeInsertSort.cpp \
+			recursiveSortPair.cpp \
 
 OBJS		= $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(addprefix $(SRC_DIR)/, $(SRCS)))
 

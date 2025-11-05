@@ -30,21 +30,23 @@ void PmergeMe::makePairs(int argc, char** argv)
         pairs.push_back(std::make_pair(first, second));
     }
 
-#ifdef DEBUG
     std::cout << "Initial Pairs (Larger, Smaller):" << std::endl;
     for (size_t i = 0; i < pairs.size(); ++i)
         std::cout << "(" << pairs[i].first << ", " << pairs[i].second << ") ";
+
     std::cout << std::endl;
+
     if (hasStraggler)
         std::cout << "Straggler: " << straggler << std::endl;
-#endif
+
+    std::cout << std::endl;
 }
 
 void PmergeMe::processAndSort(int argc, char** argv)
 {
     isValidUnsignedInt(argc, argv);
     makePairs(argc, argv);
-    execFordJohnson(pairs);
+    recursiveSortPair(pairs);  // thanks to the overload better function call
 }
 
 PmergeMe::PmergeMe() {}
