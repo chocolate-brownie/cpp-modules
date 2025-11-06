@@ -83,16 +83,17 @@ private:
     bool         hasStraggler;
     unsigned int straggler;
 
-    bool         isValidUnsignedInt(int argc, char** argv);
-    void         makePairs(int argc, char** argv);
+    bool isValidUnsignedInt(int argc, char** argv);
+    void pairAndCompare(int argc, char** argv);
+    void recursivelySortMainChain();
+    void insertPendingElems();
+    void optimalInsertion();
+    void printResults();
+
+    void recursivelySortMainChain(std::vector<std::pair<unsigned int, unsigned int> >& pairs,
+                                  size_t left, size_t right, int depth);
+
     unsigned int ft_strtoul(const char* s);
-
-    void recursiveSortPair(std::vector<std::pair<unsigned int, unsigned int> >& pairs, size_t left,
-                           size_t right, int depth);
-
-    // this is a function overload for a better call
-    void recursiveSortPair();
-    void pushElemsToChains();
 
 public:
     void processAndSort(int argc, char** argv);

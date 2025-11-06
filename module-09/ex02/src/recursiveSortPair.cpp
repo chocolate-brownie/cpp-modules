@@ -61,7 +61,7 @@ static void merge(std::vector<std::pair<unsigned int, unsigned int> >& pairs, si
  *      the sorted should loook like this after merging
  *         (12, 32) (90, 71) (152, 89) (167, 12)
  * */
-void PmergeMe::recursiveSortPair()
+void PmergeMe::recursivelySortMainChain()
 {
     if (pairs.size() > 1)
     {
@@ -69,15 +69,18 @@ void PmergeMe::recursiveSortPair()
         std::cout << "runnign first call ";
         std::cout << "left:[" << 0 << "] ";
         std::cout << "right:[" << pairs.size() - 1 << "]" << std::endl << std::endl;
-        recursiveSortPair(pairs, 0, pairs.size() - 1, 0);
+        recursivelySortMainChain(pairs, 0, pairs.size() - 1, 0);
         std::cout << "[DEBUG] Ending recursiveSortPair();" << std::endl;
+        std::cout << "--------------------------------------------------------" << std::endl;
+        for (size_t i = 0; i < pairs.size(); ++i)
+            std::cout << "(" << pairs[i].first << ", " << pairs[i].second << ") ";
     }
 
     return;
 }
 
-void PmergeMe::recursiveSortPair(std::vector<std::pair<unsigned int, unsigned int> >& pairs,
-                                 size_t left, size_t right, int depth)
+void PmergeMe::recursivelySortMainChain(std::vector<std::pair<unsigned int, unsigned int> >& pairs,
+                                        size_t left, size_t right, int depth)
 {
     /* @note So this method is the easiest to understand but lack in performance due to new memory
      * allocation and copying all the pairs at every single step of the recursion.
@@ -126,13 +129,13 @@ void PmergeMe::recursiveSortPair(std::vector<std::pair<unsigned int, unsigned in
     std::cout << indent << "[CALLING LEFT] recursiveSortPair(pairs, " << left << ", " << mid
               << ")\n"
               << std::endl;
-    recursiveSortPair(pairs, left, mid, depth + 1);
+    recursivelySortMainChain(pairs, left, mid, depth + 1);
 
     // Call itself for the right half, INCREASING depth
     std::cout << indent << "[CALLING RIGHT] recursiveSortPair(pairs, " << mid + 1 << ", " << right
               << ")\n"
               << std::endl;
-    recursiveSortPair(pairs, mid + 1, right, depth + 1);
+    recursivelySortMainChain(pairs, mid + 1, right, depth + 1);
 
     // Merge: This is where your merge call will go.
     std::cout << indent << "[MERGING] mergePairs(pairs, " << left << ", " << mid << ", " << right
