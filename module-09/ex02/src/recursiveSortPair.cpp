@@ -3,6 +3,34 @@
 #include <utility>
 #include <vector>
 
+static void merge(std::vector<std::pair<unsigned int, unsigned int> >& pairs, size_t left,
+                  size_t mid, size_t right)
+{
+    size_t totalElem = (right - left) + 1;
+    size_t i         = left;
+    size_t j         = mid + 1;
+    size_t k         = 0;
+
+    std::vector<std::pair<unsigned int, unsigned int> > temp(totalElem);
+
+    while (i <= mid && j <= right)
+    {
+        if (pairs[i].first < pairs[j].first)
+            temp[k++] = pairs[i++];
+        else
+            temp[k++] = pairs[j++];
+    }
+
+    while (i <= mid)
+        temp[k++] = pairs[i++];
+
+    while (j <= right)
+        temp[k++] = pairs[j++];
+
+    for (i = 0; i < totalElem; ++i)
+        pairs[left + i] = temp[i];
+}
+
 // static void mergePairs(std::vector<std::pair<unsigned int, unsigned int> >& pairs, size_t left,
 //                        size_t mid, size_t right)
 // {
@@ -33,19 +61,23 @@
  *      the sorted should loook like this after merging
  *         (12, 32) (90, 71) (152, 89) (167, 12)
  * */
-void PmergeMe::recursiveSortPair(std::vector<std::pair<unsigned int, unsigned int> >& pairs)
+void PmergeMe::recursiveSortPair()
 {
     if (pairs.size() > 1)
     {
+        std::cout << "[DEBUG] Starting recursiveSortPair();" << std::endl;
         std::cout << "runnign first call ";
         std::cout << "left:[" << 0 << "] ";
         std::cout << "right:[" << pairs.size() - 1 << "]" << std::endl << std::endl;
-        recursiveSortPair(pairs, 0, pairs.size() - 1);
+        recursiveSortPair(pairs, 0, pairs.size() - 1, 0);
+        std::cout << "[DEBUG] Ending recursiveSortPair();" << std::endl;
     }
+
+    return;
 }
 
 void PmergeMe::recursiveSortPair(std::vector<std::pair<unsigned int, unsigned int> >& pairs,
-                                 size_t left, size_t right)
+                                 size_t left, size_t right, int depth)
 {
     /* @note So this method is the easiest to understand but lack in performance due to new memory
      * allocation and copying all the pairs at every single step of the recursion.
@@ -59,36 +91,56 @@ void PmergeMe::recursiveSortPair(std::vector<std::pair<unsigned int, unsigned in
      * Indexing is the preferred way when writing the ford-johnson
      */
 
+    std::string indent(depth * 4, ' ');
+
+    std::cout << indent << "left:\t" << left << "\t";
     std::cout << "left:\t" << left << "\t";
     std::cout << "pairs[" << left << "].first = " << pairs[left].first << "\t";
     std::cout << "pairs[" << left << "].second = " << pairs[left].second << std::endl;
 
+    std::cout << indent << "right:\t" << right << "\t";
     std::cout << "right:\t" << right << "\t";
     std::cout << "pairs[" << right << "].first = " << pairs[right].first << "\t";
     std::cout << "pairs[" << right << "].second = " << pairs[right].second << std::endl;
 
     if (left >= right)
     {
-        std::cout << "\nleft: " << left << " >= right: " << right << "\nreturning...\n"
+        std::cout << indent << "\n"
+                  << indent << "left: " << left << " >= right: " << right << "\n"
+                  << indent << "[BASE CASE] Returning.. Depth: " << depth << "\n"
                   << std::endl;
+
         return;
     }
 
-    std::cout << std::endl;
-
-    std::cout << "-------------------------------------------------------------" << std::endl;
+    std::cout << indent << std::endl;
+    std::cout << indent << "--------------------------------------------------------" << std::endl;
     size_t mid = left + (right - left) / 2;  // finding the middle index
+    std::cout << indent << "mid:\t" << mid << "\t";
+    std::cout << indent << "pairs[" << mid << "].first = " << pairs[mid].first << "\t";
+    std::cout << indent << "pairs[" << mid << "].second = " << pairs[mid].second << std::endl;
+    std::cout << indent << "--------------------------------------------------------" << std::endl;
+    std::cout << indent << std::endl;
 
-    std::cout << "mid:\t" << mid << "\t";
-    std::cout << "pairs[" << mid << "].first = " << pairs[mid].first << "\t";
-    std::cout << "pairs[" << mid << "].second = " << pairs[mid].second << std::endl;
+    // Call itself for the left half, INCREASING depth
+    std::cout << indent << "[CALLING LEFT] recursiveSortPair(pairs, " << left << ", " << mid
+              << ")\n"
+              << std::endl;
+    recursiveSortPair(pairs, left, mid, depth + 1);
 
-    std::cout << "-------------------------------------------------------------" << std::endl;
+    // Call itself for the right half, INCREASING depth
+    std::cout << indent << "[CALLING RIGHT] recursiveSortPair(pairs, " << mid + 1 << ", " << right
+              << ")\n"
+              << std::endl;
+    recursiveSortPair(pairs, mid + 1, right, depth + 1);
 
-    std::cout << std::endl;
+    // Merge: This is where your merge call will go.
+    std::cout << indent << "[MERGING] mergePairs(pairs, " << left << ", " << mid << ", " << right
+              << ")\n"
+              << std::endl;
+    merge(pairs, left, mid, right);
 
-    std::cout << "[RUNNING]: recursiveSortPair(pairs, left, mid);\n" << std::endl;
-    recursiveSortPair(pairs, left, mid);
-    std::cout << "[RUNNING]: recursiveSortPair(pairs, mid + 1, right);\n" << std::endl;
-    recursiveSortPair(pairs, mid + 1, right);
+    std::cout << indent << "[RETURN] Finished call for sort(" << left << ", " << right << ")\n"
+              << std::endl;
+    return;
 }

@@ -88,13 +88,25 @@ private:
     unsigned int ft_strtoul(const char* s);
 
     void recursiveSortPair(std::vector<std::pair<unsigned int, unsigned int> >& pairs, size_t left,
-                           size_t right);
+                           size_t right, int depth);
 
     // this is a function overload for a better call
-    void recursiveSortPair(std::vector<std::pair<unsigned int, unsigned int> >& pairs);
+    void recursiveSortPair();
+    void pushElemsToChains();
 
 public:
     void processAndSort(int argc, char** argv);
+
+    template <typename Container>
+    void printContainer(const Container& container)
+    {
+        typename Container::const_iterator it  = container.begin();
+        typename Container::const_iterator end = container.end();
+
+        for (; it != end; ++it)
+            std::cout << *it << " ";
+        std::cout << std::endl;
+    }
 
     PmergeMe();
     ~PmergeMe();
