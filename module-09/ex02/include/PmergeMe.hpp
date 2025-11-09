@@ -77,8 +77,7 @@ and algorithmic guides.[1][2]
 class PmergeMe {
 private:
     std::vector<std::pair<unsigned int, unsigned int> > pairs;
-    std::vector<unsigned int>                           main;
-    std::vector<unsigned int>                           pending;
+    std::vector<unsigned int>                           finalChain;
 
     bool         hasStraggler;
     unsigned int straggler;
@@ -87,8 +86,6 @@ private:
     void pairAndCompare(int argc, char** argv);
     void recursivelySortMainChain();
     void insertPendingElems();
-    void optimalInsertion();
-    void printResults();
 
     void recursivelySortMainChain(std::vector<std::pair<unsigned int, unsigned int> >& pairs,
                                   size_t left, size_t right, int depth);

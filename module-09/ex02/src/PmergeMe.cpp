@@ -4,33 +4,37 @@
 #include <utility>
 #include <vector>
 
-void PmergeMe::optimalInsertion()
-{
-    std::cout << "--------------------------------------------------------" << std::endl;
-    main.insert(main.begin(), pending[0]);
-    for (std::vector<unsigned int>::iterator it = pending.begin(); it != pending.end(); ++it)
-    {
-        std::vector<unsigned int>::iterator pos =
-            std::lower_bound(main.begin(), main.end(), pending[*it]);
-        std::cout << *it << " ";
-    }
-    std::cout << "--------------------------------------------------------" << std::endl;
-}
-
+/* You dont really have to create two extra vectors called main chain and pending chain to do
+ * the insertion, you can just have one chain called finalChain and push everything from the
+ * pairs[i].first (which is essentially the main chain) pairs[i].second which is the pending
+ * chain. You can do a comparePairs() function and use lower_bound() directly to do the
+ * insertion
+ */
 void PmergeMe::insertPendingElems()
 {
+    std::cout << "\n[OPERATION]: Pushing pairs[i].first to the mainChain" << std::endl;
     for (size_t i = 0; i < pairs.size(); ++i)
+        finalChain.push_back(pairs[i].first);
+
+    std::cout << "[OPERATION]: Pushign pairs[i].second to the mainChain" << std::endl;
+    if (!pairs.empty())
+        finalChain.insert(finalChain.begin(), pairs[0].second);
+    for (size_t i = 1; i < pairs.size(); ++i)
     {
-        main.push_back(pairs[i].first);
-        pending.push_back(pairs[i].second);
+        unsigned int valueToInsert = pairs[i].second;
+
+        std::vector<unsigned int>::iterator pos =
+            std::lower_bound(finalChain.begin(), finalChain.end(), valueToInsert);
+        finalChain.insert(pos, valueToInsert);
     }
 
-    std::cout << "\n--------------------------------------------------------" << std::endl;
-    std::cout << "Main chain:\t";
-    printContainer(main);
-    std::cout << "Pending chain:\t";
-    printContainer(pending);
-    std::cout << "--------------------------------------------------------" << std::endl;
+    if (hasStraggler)
+    {
+        std::cout << "[OPERATION]: Adding straggler to the mainChain" << std::endl;
+        std::vector<unsigned int>::iterator pos =
+            std::lower_bound(finalChain.begin(), finalChain.end(), straggler);
+        finalChain.insert(pos, straggler);
+    }
     return;
 }
 
@@ -88,20 +92,9 @@ void PmergeMe::processAndSort(int argc, char** argv)
      * order by comparing the pair.first elem in each pair */
     recursivelySortMainChain();
 
-    /* Then I will push the pairs.first to a main chain and the pairs.second to the pending chain
-     * Then I have to take everyting from the pending chain put everything inside one main chain and
-     * print them out */
     insertPendingElems();
-
-    /** NOTE: IMPORTANT TODO
-     *
-     * You dont really have to create two extra vectors called main chain and pending chain to do the
-     * insertion, you can just have one chain called finalChain and push everything from the
-     * pairs[i].first (which is essentially the main chain) pairs[i].second which is the pending chain.
-     * You can do a comparePairs() function and use lower_bound() directly to do the insertion
-     */
-    optimalInsertion();
-    // printResults();
+    std::cout << "\n\n" << std::endl;
+    printContainer(finalChain);
 }
 
 PmergeMe::PmergeMe() {}
