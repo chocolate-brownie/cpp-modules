@@ -1,8 +1,13 @@
 #include "../include/PmergeMe.hpp"
-#include <algorithm>
-#include <cstddef>
-#include <utility>
-#include <vector>
+#include "../include/PmergeMeUtils.hpp"
+
+void PmergeMe::printFinalResult() const
+{
+    for (std::vector<unsigned int>::const_iterator it = finalChain.begin();
+         it != finalChain.end(); ++it)
+        std::cout << *it << " ";
+    std::cout << std::endl;
+}
 
 /* You dont really have to create two extra vectors called main chain and pending chain to do
  * the insertion, you can just have one chain called finalChain and push everything from the
@@ -93,8 +98,6 @@ void PmergeMe::processAndSort(int argc, char** argv)
     recursivelySortMainChain();
 
     insertPendingElems();
-    std::cout << "\n\n" << std::endl;
-    printContainer(finalChain);
 }
 
 PmergeMe::PmergeMe() {}

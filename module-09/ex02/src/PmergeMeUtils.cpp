@@ -1,7 +1,6 @@
-#include "../include/PmergeMe.hpp"
-#include <cctype>
+#include "../include/PmergeMeUtils.hpp"
 
-bool PmergeMe::isValidUnsignedInt(int argc, char** argv)
+bool isValidUnsignedInt(int argc, char** argv)
 {
     for (int i = 1; i < argc; i++)
     {
@@ -37,7 +36,7 @@ bool PmergeMe::isValidUnsignedInt(int argc, char** argv)
     return true;
 }
 
-unsigned int PmergeMe::ft_strtoul(const char* s)
+unsigned int ft_strtoul(const char* s)
 {
     unsigned long temp  = strtoul(s, NULL, 10);
     unsigned int  value = static_cast<unsigned int>(temp);

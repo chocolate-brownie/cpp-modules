@@ -68,11 +68,13 @@ and algorithmic guides.[1][2]
 */
 #include <iostream>  // IWYU pragma: keep
 #include <utility>
-#include <vector>   // IWYU pragma: keep
-#include <cstdlib>  // IWYU pragma: keep
-#include <climits>  // IWYU pragma: keep
-#include <cerrno>   // IWYU pragma: keep
-#include <cctype>   // IWYU pragma: keep
+#include <vector>     // IWYU pragma: keep
+#include <cstdlib>    // IWYU pragma: keep
+#include <climits>    // IWYU pragma: keep
+#include <cerrno>     // IWYU pragma: keep
+#include <cctype>     // IWYU pragma: keep
+#include <algorithm>  // IWYU pragma: keep
+#include <cstddef>    // IWYU pragma: keep
 
 class PmergeMe {
 private:
@@ -82,21 +84,20 @@ private:
     bool         hasStraggler;
     unsigned int straggler;
 
-    bool isValidUnsignedInt(int argc, char** argv);
     void pairAndCompare(int argc, char** argv);
-    void recursivelySortMainChain();
     void insertPendingElems();
-
+    void recursivelySortMainChain();
     void recursivelySortMainChain(std::vector<std::pair<unsigned int, unsigned int> >& pairs,
                                   size_t left, size_t right, int depth);
 
-    unsigned int ft_strtoul(const char* s);
-
 public:
-    void processAndSort(int argc, char** argv);
+    PmergeMe();
+    ~PmergeMe();
+    PmergeMe(const PmergeMe& other);
+    PmergeMe& operator=(const PmergeMe& other);
 
     template <typename Container>
-    void printContainer(const Container& container)
+    void printContainer(const Container& container) const
     {
         typename Container::const_iterator it  = container.begin();
         typename Container::const_iterator end = container.end();
@@ -106,10 +107,8 @@ public:
         std::cout << std::endl;
     }
 
-    PmergeMe();
-    ~PmergeMe();
-    PmergeMe(const PmergeMe& other);
-    PmergeMe& operator=(const PmergeMe& other);
+    void processAndSort(int argc, char** argv);
+    void printFinalResult() const;
 };
 
 #endif

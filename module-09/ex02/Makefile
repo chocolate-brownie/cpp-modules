@@ -7,9 +7,11 @@ OBJ_DIR		= build
 INC_DIR		= include
 
 SRCS		= main.cpp \
-			PmergeMe.cpp \
-			pmergeMeUtils.cpp \
-			recursiveSortPair.cpp \
+			PmergeMeVector.cpp \
+			recursiveSortPairVector.cpp \
+			PmergeMeUtils.cpp \
+			PmergeMeDeque.cpp \
+			recursiveSortPairDeque.cpp \
 
 OBJS		= $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(addprefix $(SRC_DIR)/, $(SRCS)))
 
