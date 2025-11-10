@@ -13,4 +13,12 @@
 bool isValidUnsignedInt(int argc, char** argv);
 unsigned int ft_strtoul(const char* s);
 
+template <typename Container>
+Container buildJacobInsertionSeq(std::size_t n)
+{
+    Container seq;
+    // ... logic to fill 'seq' with the Jacobsthal indices ...
+    return seq;
+}
+
 #endif

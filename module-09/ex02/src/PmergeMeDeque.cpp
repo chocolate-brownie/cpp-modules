@@ -1,14 +1,51 @@
 #include "../include/PmergeMeDeque.hpp"
 #include "../include/PmergeMeUtils.hpp"
+#include <algorithm>
+#include <cstddef>
+#include <deque>
 
 void PmergeMeDeque::printFinalResult() const
 {
-    for (std::deque<unsigned int>::const_iterator it = finalChain.begin();
-         it != finalChain.end(); ++it)
+    for (std::deque<unsigned int>::const_iterator it = finalChain.begin(); it != finalChain.end();
+         ++it)
         std::cout << *it << " ";
     std::cout << std::endl;
 }
 
+void PmergeMeDeque::insertPendingElems()
+{
+    std::cout << "\n[OPERATION]: Pushing pairs[i].first to the mainChain" << std::endl;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        finalChain.push_back(pairs[i].first);
+
+    std::cout << "[OPERATION]: Pushing pairs[i].second to the mainChain" << std::endl;
+    if (!pairs.empty())
+        finalChain.insert(finalChain.begin(), pairs[0].second);
+
+    /* This will create the jacobSeq to the size of the pending elem list */
+    std::deque<unsigned int> jacobSeq =
+        buildJacobInsertionSeq<std::deque<unsigned int> >(pairs.size());
+
+    for (size_t seqIdx = 0; seqIdx < jacobSeq.size(); ++seqIdx)
+    {
+        size_t       i             = jacobSeq[seqIdx];
+        unsigned int valueToInsert = pairs[i].second;
+
+        std::deque<unsigned int>::iterator pos =
+            lower_bound(finalChain.begin(), finalChain.end(), valueToInsert);
+        finalChain.insert(pos, valueToInsert);
+    }
+
+    if (hasStraggler)
+    {
+        std::cout << "[OPERATION]: Adding straggler to the mainChain" << std::endl;
+        std::deque<unsigned int>::iterator pos =
+            std::lower_bound(finalChain.begin(), finalChain.end(), straggler);
+        finalChain.insert(pos, straggler);
+    }
+}
+
+/*
 void PmergeMeDeque::insertPendingElems()
 {
     std::cout << "\n[OPERATION]: Pushing pairs[i].first to the mainChain" << std::endl;
@@ -37,6 +74,7 @@ void PmergeMeDeque::insertPendingElems()
         finalChain.insert(pos, straggler);
     }
 }
+*/
 
 void PmergeMeDeque::pairAndCompare(int argc, char** argv)
 {
