@@ -8,6 +8,8 @@
 /*
 grep -rni --include='*.log' '(std::deq)'
 grep -rni --include='*.cpp' '(std::deq)'
+
+https://numbergenerator.org/randomnumbergenerator/combinations-generator
 */
 
 double getTimeInMicroSeconds(struct timeval* start, struct timeval* end)

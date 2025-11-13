@@ -1,5 +1,6 @@
 #include "../include/PmergeMe.hpp"
 #include "../include/PmergeMeUtils.hpp"
+#include <vector>
 
 void PmergeMe::printFinalResult() const
 {
@@ -15,33 +16,41 @@ void PmergeMe::printFinalResult() const
  * chain. You can do a comparePairs() function and use lower_bound() directly to do the
  * insertion
  */
-void PmergeMe::insertPendingElems()
-{
-    std::cout << "\n[OPERATION]: Pushing pairs[i].first to the mainChain" << std::endl;
-    for (size_t i = 0; i < pairs.size(); ++i)
-        finalChain.push_back(pairs[i].first);
+ void PmergeMe::insertPendingElems()
+ {
+     std::cout << "\n[OPERATION]: Pushing pairs[i].first to the mainChain" << std::endl;
+     for (size_t i = 0; i < pairs.size(); ++i)
+         finalChain.push_back(pairs[i].first);
 
-    std::cout << "[OPERATION]: Pushign pairs[i].second to the mainChain" << std::endl;
-    if (!pairs.empty())
-        finalChain.insert(finalChain.begin(), pairs[0].second);
-    for (size_t i = 1; i < pairs.size(); ++i)
-    {
-        unsigned int valueToInsert = pairs[i].second;
+     if (!pairs.empty())
+     {
+         std::cout << "[OPERATION]: Pushing pairs[i].second to the mainChain" << std::endl;
+         finalChain.insert(finalChain.begin(), pairs[0].second);
+     }
 
-        std::vector<unsigned int>::iterator pos =
-            std::lower_bound(finalChain.begin(), finalChain.end(), valueToInsert);
-        finalChain.insert(pos, valueToInsert);
-    }
+     std::cout << "\n[OPERATION]: Creating the Jacobsthal Index Sequence" << std::endl;
+     std::vector<unsigned int> jacobSeq =
+         buildJacobInsertionSeq<std::vector<unsigned int> >(pairs.size());
+     printContainer(jacobSeq);
 
-    if (hasStraggler)
-    {
-        std::cout << "[OPERATION]: Adding straggler to the mainChain" << std::endl;
-        std::vector<unsigned int>::iterator pos =
-            std::lower_bound(finalChain.begin(), finalChain.end(), straggler);
-        finalChain.insert(pos, straggler);
-    }
-    return;
-}
+     for (size_t seqIdx = 1; seqIdx < jacobSeq.size(); ++seqIdx)
+     {
+         size_t       i             = jacobSeq[seqIdx];
+         unsigned int valueToInsert = pairs[i].second;
+
+         std::vector<unsigned int>::iterator pos =
+             lower_bound(finalChain.begin(), finalChain.end(), valueToInsert);
+         finalChain.insert(pos, valueToInsert);
+     }
+
+     if (hasStraggler)
+     {
+         std::cout << "[OPERATION]: Adding straggler to the mainChain" << std::endl;
+         std::vector<unsigned int>::iterator pos =
+             std::lower_bound(finalChain.begin(), finalChain.end(), straggler);
+         finalChain.insert(pos, straggler);
+     }
+ }
 
 /* I would go through the args(size) and push them into a vector as pairs.
  * At the end it should looks like this:[ (5, 3), (9, 7), (4, 2) ] the first

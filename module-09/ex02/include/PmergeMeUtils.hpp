@@ -52,7 +52,7 @@ Container buildJacobInsertionSeq(std::size_t sizeOfThePenList)
         for (size_t k = jacobIndx; k > lastIndexAdded; --k)
             seq.push_back(k);
 
-        lastIndexAdded = jacobNum;
+        lastIndexAdded = jacobIndx;
     }
 
     // Add the leftvoers (eg: if size is 6, this add p6(idx 5))

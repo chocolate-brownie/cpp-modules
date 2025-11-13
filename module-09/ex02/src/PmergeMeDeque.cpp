@@ -14,7 +14,7 @@ void PmergeMeDeque::printFinalResult() const
 
 void PmergeMeDeque::insertPendingElems()
 {
-    std::cout << "[OPERATION]: Pushing pairs[i].first to the mainChain" << std::endl;
+    std::cout << "\n[OPERATION]: Pushing pairs[i].first to the mainChain" << std::endl;
     for (size_t i = 0; i < pairs.size(); ++i)
         finalChain.push_back(pairs[i].first);
 
