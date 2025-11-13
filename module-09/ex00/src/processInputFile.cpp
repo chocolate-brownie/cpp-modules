@@ -62,22 +62,17 @@ static bool isValidDateFormat(const std::string& date)
     return true;
 }
 
-static bool isValidValue(double value)
+static void isValidValue(double value)
 {
     if (value < 0)
-    {
-        return false;
-    }
+        throw std::runtime_error("Error: not a positive number.");
     if (value > 1000)
-    {
-        return false;
-    }
-    return true;
+        throw std::runtime_error("Error: too large a number.");
 }
 
 /* [TODO] This method should validate the current reading line, whether the line
  * is exactly the xxxx-xx-xx | double or a comment */
-static bool parseLine(std::string& readLine, std::string& date, double& val)
+static void parseLine(std::string& readLine, std::string& date, double& val)
 {
     std::istringstream ss(readLine);
     /* [NOTE] The extraction operator (>>) reads from this internal buffer until
@@ -86,27 +81,17 @@ static bool parseLine(std::string& readLine, std::string& date, double& val)
      * types). */
     char seperator;
     if (!(ss >> date >> seperator >> val))
-        return false;
+        throw std::runtime_error("Error: bad input => " + readLine);
 
     if (!ss.eof())
-    {
-        return false;
-    }
+        throw std::runtime_error("Error: bad input => " + readLine);
 
     if (!isValidDateFormat(date))
-    {
-        return false;
-    }
-    else if (seperator != '|')
-    {
-        return false;
-    }
-    else if (!isValidValue(val))
-    {
-        return false;
-    }
+        throw std::runtime_error("Error: bad input => " + readLine);
+    if (seperator != '|')
+        throw std::runtime_error("Error: bad input => " + readLine);
 
-    return true;
+    isValidValue(val);
 }
 
 /* [TODO] Algorithm
@@ -130,17 +115,21 @@ void BitCoinExchange::processInputFile(const std::string& filePath)
             continue;
         }
 
-        std::string date;
-        double      val;
-
-        if (!parseLine(readLine, date, val))
+        try
         {
-            std::cerr << "Error: Bad input => " << readLine << std::endl;
-            continue;
-        }
+            std::string date;
+            double      val;
 
-        double price = BitCoinExchange::_findPriceForDate(date);
-        std::cout << date << " => " << val << " = " << (val * price) << std::endl;
+            // Parse the line. This will throw if anything is wrong.
+            parseLine(readLine, date, val);
+            // If parsing succeeds, find the price.
+            double price = BitCoinExchange::_findPriceForDate(date);
+            // Print the successful result.
+            std::cout << date << " => " << val << " = " << (val * price) << std::endl;
+        } catch (std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
     }
 
 #ifdef DEBUG

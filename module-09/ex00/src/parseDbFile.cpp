@@ -6,9 +6,7 @@ void BitCoinExchange::_parseDbFile(const std::string& dbFilePath)
 {
     std::ifstream file(dbFilePath.c_str());
     if (!file.good())
-    {
         throw BitCoinExchangeException("Error: Databse file does not exist or cannot be opened");
-    }
 
     std::string line;
     std::getline(file, line);  // read and discard the headerline
