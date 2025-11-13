@@ -14,11 +14,6 @@ void PmergeMeDeque::printFinalResult() const
 
 void PmergeMeDeque::insertPendingElems()
 {
-    std::cout << "\n[OPERATION]: Creating the Jacobsthal Index Sequence" << std::endl;
-    std::deque<unsigned int> jacobSeq =
-        buildJacobInsertionSeq<std::deque<unsigned int> >(pairs.size());
-    printContainer(jacobSeq);
-
     std::cout << "[OPERATION]: Pushing pairs[i].first to the mainChain" << std::endl;
     for (size_t i = 0; i < pairs.size(); ++i)
         finalChain.push_back(pairs[i].first);
@@ -29,7 +24,12 @@ void PmergeMeDeque::insertPendingElems()
         finalChain.insert(finalChain.begin(), pairs[0].second);
     }
 
-    for (size_t seqIdx = 0; seqIdx < jacobSeq.size(); ++seqIdx)
+    std::cout << "\n[OPERATION]: Creating the Jacobsthal Index Sequence" << std::endl;
+    std::deque<unsigned int> jacobSeq =
+        buildJacobInsertionSeq<std::deque<unsigned int> >(pairs.size());
+    printContainer(jacobSeq);
+
+    for (size_t seqIdx = 1; seqIdx < jacobSeq.size(); ++seqIdx)
     {
         size_t       i             = jacobSeq[seqIdx];
         unsigned int valueToInsert = pairs[i].second;
