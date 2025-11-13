@@ -120,13 +120,25 @@ void PmergeMeDeque::processAndSort(int argc, char** argv)
     insertPendingElems();
 }
 
-PmergeMeDeque::PmergeMeDeque() {}
+
+/*---------------------------------------------------------------------------------------------- */
+PmergeMeDeque::PmergeMeDeque() : hasStraggler(false), straggler(0) {}
 PmergeMeDeque::~PmergeMeDeque() {}
 
-/*
-PmergeMe::PmergeMe(const PmergeMe& other) {}
-PmergeMe& PmergeMe::operator=(const PmergeMe& other)
+PmergeMeDeque::PmergeMeDeque(const PmergeMeDeque& other)
 {
+    *this = other;
+}
+
+PmergeMeDeque& PmergeMeDeque::operator=(const PmergeMeDeque& other)
+{
+    if (this != &other)
+    {
+        this->pairs        = other.pairs;
+        this->finalChain   = other.finalChain;
+        this->hasStraggler = other.hasStraggler;
+        this->straggler    = other.straggler;
+    }
     return *this;
 }
-*/
+/*---------------------------------------------------------------------------------------------- */

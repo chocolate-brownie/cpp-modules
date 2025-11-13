@@ -4,8 +4,8 @@
 
 void PmergeMe::printFinalResult() const
 {
-    for (std::vector<unsigned int>::const_iterator it = finalChain.begin();
-         it != finalChain.end(); ++it)
+    for (std::vector<unsigned int>::const_iterator it = finalChain.begin(); it != finalChain.end();
+         ++it)
         std::cout << *it << " ";
     std::cout << std::endl;
 }
@@ -16,41 +16,41 @@ void PmergeMe::printFinalResult() const
  * chain. You can do a comparePairs() function and use lower_bound() directly to do the
  * insertion
  */
- void PmergeMe::insertPendingElems()
- {
-     std::cout << "\n[OPERATION]: Pushing pairs[i].first to the mainChain" << std::endl;
-     for (size_t i = 0; i < pairs.size(); ++i)
-         finalChain.push_back(pairs[i].first);
+void PmergeMe::insertPendingElems()
+{
+    std::cout << "\n[OPERATION]: Pushing pairs[i].first to the mainChain" << std::endl;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        finalChain.push_back(pairs[i].first);
 
-     if (!pairs.empty())
-     {
-         std::cout << "[OPERATION]: Pushing pairs[i].second to the mainChain" << std::endl;
-         finalChain.insert(finalChain.begin(), pairs[0].second);
-     }
+    if (!pairs.empty())
+    {
+        std::cout << "[OPERATION]: Pushing pairs[i].second to the mainChain" << std::endl;
+        finalChain.insert(finalChain.begin(), pairs[0].second);
+    }
 
-     std::cout << "\n[OPERATION]: Creating the Jacobsthal Index Sequence" << std::endl;
-     std::vector<unsigned int> jacobSeq =
-         buildJacobInsertionSeq<std::vector<unsigned int> >(pairs.size());
-     printContainer(jacobSeq);
+    std::cout << "\n[OPERATION]: Creating the Jacobsthal Index Sequence" << std::endl;
+    std::vector<unsigned int> jacobSeq =
+        buildJacobInsertionSeq<std::vector<unsigned int> >(pairs.size());
+    printContainer(jacobSeq);
 
-     for (size_t seqIdx = 1; seqIdx < jacobSeq.size(); ++seqIdx)
-     {
-         size_t       i             = jacobSeq[seqIdx];
-         unsigned int valueToInsert = pairs[i].second;
+    for (size_t seqIdx = 1; seqIdx < jacobSeq.size(); ++seqIdx)
+    {
+        size_t       i             = jacobSeq[seqIdx];
+        unsigned int valueToInsert = pairs[i].second;
 
-         std::vector<unsigned int>::iterator pos =
-             lower_bound(finalChain.begin(), finalChain.end(), valueToInsert);
-         finalChain.insert(pos, valueToInsert);
-     }
+        std::vector<unsigned int>::iterator pos =
+            lower_bound(finalChain.begin(), finalChain.end(), valueToInsert);
+        finalChain.insert(pos, valueToInsert);
+    }
 
-     if (hasStraggler)
-     {
-         std::cout << "[OPERATION]: Adding straggler to the mainChain" << std::endl;
-         std::vector<unsigned int>::iterator pos =
-             std::lower_bound(finalChain.begin(), finalChain.end(), straggler);
-         finalChain.insert(pos, straggler);
-     }
- }
+    if (hasStraggler)
+    {
+        std::cout << "[OPERATION]: Adding straggler to the mainChain" << std::endl;
+        std::vector<unsigned int>::iterator pos =
+            std::lower_bound(finalChain.begin(), finalChain.end(), straggler);
+        finalChain.insert(pos, straggler);
+    }
+}
 
 /* I would go through the args(size) and push them into a vector as pairs.
  * At the end it should looks like this:[ (5, 3), (9, 7), (4, 2) ] the first
@@ -109,13 +109,24 @@ void PmergeMe::processAndSort(int argc, char** argv)
     insertPendingElems();
 }
 
-PmergeMe::PmergeMe() {}
+/*---------------------------------------------------------------------------------------------- */
+PmergeMe::PmergeMe() : hasStraggler(false), straggler(0) {}
 PmergeMe::~PmergeMe() {}
 
-/*
-PmergeMe::PmergeMe(const PmergeMe& other) {}
+PmergeMe::PmergeMe(const PmergeMe& other)
+{
+    *this = other;
+}
+
 PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 {
+    if (this != &other)
+    {
+        this->pairs        = other.pairs;
+        this->finalChain   = other.finalChain;
+        this->hasStraggler = other.hasStraggler;
+        this->straggler    = other.straggler;
+    }
     return *this;
 }
-*/
+/*---------------------------------------------------------------------------------------------- */
