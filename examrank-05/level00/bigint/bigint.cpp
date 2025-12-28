@@ -1,146 +1,144 @@
 #include "bigint.hpp"
 
-bigint::bigint()
-{
-    container.push_back(0);
+bigint::bigint() {
+    vec.push_back(0);
 }
 
-bigint::bigint(const bigint& other) : container(other.container) {}
+bigint::bigint(unsigned int n) {
+    if (n == 0) {
+        vec.push_back(0);
+        return;
+    }
 
-bigint& bigint::operator=(const bigint& other)
-{
-    if (this != &other)
-        container = other.container;
-    return *this;
-}
-
-bigint::bigint(unsigned int n)
-{
-    size_t i = 0;
-    while (n > 0)
-    {
-        container.push_back(n % 10);
+    while (n > 0) {
+        vec.push_back(static_cast<unsigned char>(n % 10));
         n /= 10;
-        i++;
     }
 }
 
-bigint& bigint::operator+=(const bigint& other)
-{
-    unsigned int              carry = 0;
-    std::vector<unsigned int> temp;
-    size_t                    i = 0;
 
-    while (i < container.size() || i < other.container.size() || carry > 0)
-    {
-        unsigned int num1 = (i < container.size()) ? container[i] : 0;
-        unsigned int num2 = (i < other.container.size()) ? other.container[i] : 0;
-        unsigned int sum  = num1 + num2 + carry;
-        temp.push_back(sum % 10);
-        carry = sum / 10;
-        i++;
-    }
+bigint::bigint(const bigint& other): vec(other.vec) {}
 
-    container = temp;
+bigint& bigint::operator=(const bigint& other) {
+    if (this != &other) 
+        vec = other.vec;
+
     return *this;
 }
 
-bigint bigint::operator+(const bigint& other) const
-{
-    return bigint(*this) += other;
+bigint::~bigint() {}
+
+bigint& bigint::operator+=(const bigint& other) {    
+    size_t max_len = std::max(vec.size(), other.vec.size());
+    int carry = 0;
+    std::vector<unsigned char> result;
+
+    for (size_t i = 0; i < max_len; ++i) {
+        int num1 = (i < vec.size() ? vec[i] : 0);
+        int num2 = (i < other.vec.size() ? other.vec[i] : 0);
+        unsigned int sum = num1 + num2 + carry;
+
+        result.push_back(sum % 10);
+        carry = sum /= 10;
+    }
+
+    if (carry)
+        result.push_back(carry);
+
+    vec = result;
+    return *this;
 }
 
-bigint& bigint::operator++()
-{
+bigint bigint::operator+(const bigint& other) const {
+    bigint temp = *this;
+    temp += other;
+    return temp;
+}
+
+bigint& bigint::operator++() {
     return (*this) += 1;
 }
 
-bigint bigint::operator++(int)
-{
+bigint bigint::operator++(int) {
     bigint temp = *this;
     ++(*this);
     return temp;
 }
 
-bigint& bigint::operator<<=(const bigint& other)
-{
-    unsigned int shift_amount = 0;
-
-    for (size_t i = other.container.size(); i > 0; --i)
-        shift_amount = shift_amount * 10 + other.container[i - 1];
-
-    container.insert(container.begin(), shift_amount, 0);
-    return *this;
-}
-
-bigint& bigint::operator>>=(const bigint& other)
-{
-    unsigned int shift_amount = 0;
-    for (size_t i = other.container.size(); i > 0; --i)
-        shift_amount = shift_amount * 10 + other.container[i - 1];
-
-    container.erase(container.begin(), container.begin() + shift_amount);
-    return *this;
-}
-
-bigint bigint::operator<<(const bigint& other) const
-{
-    return bigint(*this) <<= other;
-}
-
-bool bigint::operator==(const bigint& other) const
-{
-    if (container.size() != other.container.size())
-        return false;
-
-    for (size_t i = container.size(); i > 0; --i)
-    {
-        if (container[i - 1] != other.container[i - 1])
-            return false;
+bigint& bigint::operator<<=(const bigint& other) {
+    size_t shift_amount = 0;
+    size_t multiplier = 1;
+    for (size_t i = 0; i < other.vec.size(); ++i) {
+        shift_amount += other.vec[i] * multiplier;
+        multiplier *= 10;
     }
 
-    return true;
+    vec.insert(vec.begin(), shift_amount, 0);
+    return *this;
 }
 
-bool bigint::operator!=(const bigint& other) const
-{
-    return !(*this == other);
+bigint& bigint::operator>>=(const bigint& other) {
+    size_t shift_amount = 0;
+    size_t multiplier = 1;
+    for (size_t i = 0; i < other.vec.size(); ++i) {
+        shift_amount += other.vec[i] * multiplier;
+        multiplier *= 10;
+    }
+
+    if (shift_amount >= vec.size())
+        vec.assign(1, 0);
+    else 
+        vec.erase(vec.begin(), vec.begin() + shift_amount);
+    return *this;
 }
 
-bool bigint::operator<(const bigint& other) const
-{
-    if (container.size() != other.container.size())
-        return container.size() < other.container.size();
+bigint bigint::operator<<(const bigint& other) const {
+    bigint temp = *this;
+    temp <<= other;
+    return temp;
+}
 
-    for (size_t i = container.size(); i > 0; --i)
-    {
-        if (container[i - 1] != other.container[i - 1])
-            return container[i - 1] < other.container[i - 1];
+bigint bigint::operator>>(const bigint& other) const {
+    bigint temp = *this;
+    temp >>= other;
+    return temp;
+}
+
+bool bigint::operator<(const bigint& other) const {
+    if (vec.size() != other.vec.size())
+        return vec.size() < other.vec.size();
+
+    for (size_t i = vec.size(); i > 0; --i) {
+        if (vec[i - 1] != other.vec[i - 1])
+            return vec[i - 1] < other.vec[i - 1];
     }
 
     return false;
 }
 
-bool bigint::operator<=(const bigint& other) const
-{
-    return (*this == other) || (*this < other);
+bool bigint::operator==(const bigint& other) const {
+    return vec == other.vec;
 }
 
-bool bigint::operator>(const bigint& other) const
-{
+bool bigint::operator<=(const bigint& other) const {
+    return (*this < other) || (*this == other);
+}
+
+bool bigint::operator!=(const bigint& other) const {
+    return vec != other.vec;
+}
+
+bool bigint::operator>(const bigint& other) const {
     return other < *this;
 }
 
-bool bigint::operator>=(const bigint& other) const
-{
-    return (*this == other) || (*this > other);
+bool bigint::operator>=(const bigint& other) const {
+    return (*this > other) || (*this == other);
 }
 
-std::ostream& operator<<(std::ostream& os, const bigint& n)
-{
-    for (size_t i = n.container.size(); i > 0; --i)
-        os << n.container[i - 1];
+std::ostream& operator<<(std::ostream& os, const bigint& obj) {
+    std::vector<unsigned char>::const_reverse_iterator it = obj.vec.rbegin();
+    for (; it != obj.vec.rend(); ++it)
+        os << static_cast<unsigned char>(*it + '0');
     return os;
 }
-
-bigint::~bigint() {}

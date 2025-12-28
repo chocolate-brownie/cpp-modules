@@ -4,7 +4,8 @@
 int main()
 {
     const bigint a(42);
-    bigint       b(21), c, d(1337), e(d);
+
+    bigint b(21), c, d(1337), e(d);
 
     std::cout << "a = " << a << std::endl;
     std::cout << "b = " << b << std::endl;
@@ -18,7 +19,6 @@ int main()
     std::cout << "b = " << b << std::endl;
     std::cout << "++b = " << ++b << std::endl;
     std::cout << "b++ = " << b++ << std::endl;
-    std::cout << "b = " << b << std::endl;
 
     std::cout << "(b << 10) + 42 = " << ((b << 10) + 42) << std::endl;
     std::cout << "(d <<= 4) = " << (d <<= 4) << std::endl;
