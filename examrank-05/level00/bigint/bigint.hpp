@@ -3,8 +3,6 @@
 
 #include <vector>
 #include <iostream>
-#include <cstdlib>
-#include <algorithm>
 
 class bigint {
     private:
