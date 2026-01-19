@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
+enum status { DEAD, ALIVE };
+
 typedef struct s_game {
     int width;
     int height;
@@ -19,13 +21,13 @@ typedef struct s_game {
 
 } t_game;
 
-extern t_game* game;
+int idx(int x, int y, t_game* game);
 
-void init_game(char** argv);
-int  idx(int x, int y);
-void free_game(void);
-void print_board(void);
-void init_board(void);
-void draw_board(void);
+t_game* init_struct(char** argv);
+
+void free_game(t_game* g);
+void print_board(t_game* g);
+void init_board(t_game* g);
+void draw_board(t_game* g);
 
 #endif

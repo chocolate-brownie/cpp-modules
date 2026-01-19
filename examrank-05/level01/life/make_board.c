@@ -1,13 +1,13 @@
 #include "life.h"
 
-int idx(int x, int y)
+int idx(int x, int y, t_game* game)
 {
     return y * game->width + x;
 }
 
-void init_game(char** argv)
+t_game* init_struct(char** argv)
 {  // @param initialize the game
-    game = malloc(sizeof(t_game));
+    t_game* game = malloc(sizeof(t_game));
     if (!game)
         exit(1);
 
@@ -23,32 +23,33 @@ void init_game(char** argv)
     game->board = calloc(game->size, sizeof(char));
     if (!game->board)
         exit(1);
+    return game;
 }
 
-void free_game(void)
+void free_game(t_game* game)
 {                       // @param free the game
     free(game->board);  // delete the son mem
     free(game);         // delete the father mem
     game = NULL;
 }
 
-void print_board(void)
+void print_board(t_game* game)
 {
     for (int y = 0; y < game->height; ++y)
     {
         for (int x = 0; x < game->width; ++x)
-            write(1, &game->board[idx(x, y)], 1);
+            write(1, &game->board[idx(x, y, game)], 1);
         write(1, "\n", 1);
     }
 }
 
-void init_board(void)
+void init_board(t_game* game)
 {
     for (int i = 0; i < game->size; ++i)
         game->board[i] = ' ';
 }
 
-void draw_board(void)
+void draw_board(t_game* game)
 {
     while (read(0, &game->cell, 1) > 0)
     {                           // read until you hit EOF
@@ -65,6 +66,6 @@ void draw_board(void)
             ++game->x;
 
         if (game->draw)
-            game->board[idx(game->x, game->y)] = 'O';
+            game->board[idx(game->x, game->y, game)] = 'O';
     }
 }
