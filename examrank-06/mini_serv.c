@@ -1,95 +1,116 @@
-#include <errno.h>
-#include <string.h>
+#include <strings.h>
+#include <sys/select.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <netdb.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <stdio.h>
 
-void fatal()
-{
-	write(2, "Fatal error\n", 12);
-	exit(1);
+typedef struct s_client {
+    int id;
+    char msg[100000];
+} t_client;
+
+typedef struct s_server {
+    int sockfd;
+    int max_fd;
+    fd_set current_set;
+    fd_set write_set;
+    fd_set ready_set;
+    struct sockaddr_in servaddr;
+    t_client clients[FD_SETSIZE];
+} t_server;
+
+t_server server;
+
+void err() {
+    write(2, "Fatal error\n", 12);
+    exit(1);
 }
 
-int setup_server(struct sockaddr_in *servaddr, int port)
-{
-	int master_socket = 0;
-	if ((master_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-		fatal();
+int setup_server(int port) {
+    server.sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (server.sockfd == -1)
+        err();
 
-	bzero(servaddr, sizeof(*servaddr)); 
+    bzero(&server.servaddr, sizeof(server.servaddr));
+    // assign IP, PORT
+    server.servaddr.sin_family = AF_INET;
+    server.servaddr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
+    server.servaddr.sin_port = htons(port);
 
-	// assign IP, PORT 
-	servaddr->sin_family = AF_INET; 
-	servaddr->sin_addr.s_addr = htonl(2130706433); //127.0.0.1
-	servaddr->sin_port = htons(port);  
-
-	if ((bind(master_socket, (const struct sockaddr *)servaddr, sizeof(*servaddr))) != 0)
-		fatal();
-
-	if (listen(master_socket, SOMAXCONN) != 0)
-		fatal();
-
-	return master_socket; 
+    // Binding newly created socket to given IP and verification
+    if ((bind(server.sockfd, (const struct sockaddr *)&server.servaddr,
+              sizeof(server.servaddr))) != 0)
+        err();
+    if (listen(server.sockfd, 10) != 0)
+        err();
+    return 0;
 }
 
-void open_connection()
-{
-	int maxfd = 0;
-	maxfd = master_socket;
-
-	while (1)
-	{
-		// Check for incoming connection
-		int activity;
-		readfds = activefds;
-		if ((activity = select(maxfd + 1, &readfds, NULL, NULL, NULL)) < 0)
-			fatal();
-
-		/* Loop through all the availble fds */
-		for (int fd = 0; fd <= maxfd; ++fd)
-		{
-			if (!FD_ISSET(fd, &readfds))
-				continue;
-
-			if (fd == master_socket)
-			{
-				/* If the connection is coming through the master socket
-				its a new client */
-				create_new_client(master_socket);
-			}
-			else 
-			{
-				/* If its an already existing client trying to communicate
-				they are trying to send a message */
-				handle_message(fd);
-			}
-		}
-	}
+void add_new_client() {
+    return;
 }
 
-int main(int argc, char *argv[])
-{
-	if (argc != 2)
-	{
-		write(2, "Wrong number of arguments\n", 26);
-		exit(1);
-	}
-
-	struct sockaddr_in servaddr;
-	int port = atoi(argv[1]);
-
-	fd_set readfds, activefds;
-
-	FD_ZERO(&activefds); // clear the fd_set
-	int master_socket = setup_server(&servaddr, port);
-	printf("DEBUG: (%d) Server is listening on port:%d\n", master_socket, port);
-	FD_SET(master_socket, &activefds); // adding the master_socket to the active list
-	
-
-	return 0;
+void handle_existing_client() {
+    return;
 }
 
+void event_loop() {
+    /* maxfd will be 3 at initialization telling select() that there will be 4
+     * sockets in total for you to check [0(STDIN), 1(STDOUT), 2(STDERR),
+     * 3(Server Socket)]*/
+    server.max_fd = server.sockfd;
 
+    // 0 out all the fd_set for safety
+    FD_ZERO(&server.current_set);
+    FD_ZERO(&server.ready_set);
+    FD_ZERO(&server.write_set);
+
+    // add the server socket to the the current fd_se
+    FD_SET(server.sockfd, &server.current_set);
+
+    while (1) {
+        /* since select() has a desctructive behaviour.. when we pass ready_set
+         * and write_set it deletes them so we have to update its value on each
+         * iteration to make sure we dont pass an empty set */
+        server.ready_set = server.current_set;
+        server.write_set = server.current_set;
+        if (select(server.max_fd + 1, &server.ready_set, &server.write_set,
+                   NULL, NULL) == -1)
+            err();
+
+        /* upon success select() flips the bit of the active fds ready for any
+         * sort of actions so we have to iterate through the available fds
+         * inside the read_check set and check are there any fds that has its
+         * bits turned on by select() this can be checked using FD_ISSET() */
+        for (int fd = 0; fd <= server.max_fd; ++fd) {
+            if (FD_ISSET(fd, &server.ready_set)) {
+                /* once we find a fd with 1 (turned on) we check whether its
+                 * the server socket. If it is its new incoming connection else
+                 * its an already exisiting client trying to send a message */
+                if (fd == server.sockfd)
+                    add_new_client();
+                else
+                    handle_existing_client();
+            }
+        }
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        write(2, "Wrong number of arguments\n", 26);
+        exit(1);
+    }
+
+    // setup server with socket creation and verification
+    setup_server(atoi(argv[1]));
+    printf("Setup creation OK\n");
+    // main event loop
+    printf("Starting event loop\n");
+    event_loop();
+
+    return 0;
+}
