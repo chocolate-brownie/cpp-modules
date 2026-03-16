@@ -1,3 +1,4 @@
+#include <string.h>
 #include <strings.h>
 #include <sys/select.h>
 #include <unistd.h>
@@ -15,6 +16,7 @@ typedef struct s_client {
 typedef struct s_server {
     int sockfd;
     int max_fd;
+    int current_id;
     fd_set current_set;
     fd_set write_set;
     fd_set ready_set;
@@ -49,8 +51,30 @@ int setup_server(int port) {
     return 0;
 }
 
+void broadcast_message(int sender_fd, char *msg) {
+    for (int fd = 0; fd <= server.max_fd; ++fd) {
+        if (FD_ISSET(fd, &server.write_set) && fd != sender_fd &&
+            fd != server.sockfd)
+            send(fd, msg, strlen(msg), 0);
+    }
+}
+
 void add_new_client() {
-    return;
+    struct sockaddr_in cli;
+    socklen_t len = sizeof(cli);
+    int connfd = accept(server.sockfd, (struct sockaddr *)&cli, &len);
+    if (connfd < 0)
+        err();
+
+    if (connfd > server.max_fd)
+        server.max_fd = connfd;
+
+    server.clients[connfd].id = server.current_id++;
+    FD_SET(connfd, &server.current_set);
+
+    char msg[128];
+    sprintf(msg, "server: client %d just arrived\n", server.clients[connfd].id);
+    broadcast_message(connfd, msg);
 }
 
 void handle_existing_client() {
@@ -83,10 +107,10 @@ void event_loop() {
 
         /* upon success select() flips the bit of the active fds ready for any
          * sort of actions so we have to iterate through the available fds
-         * inside the read_check set and check are there any fds that has its
+         * inside the ready/write set and check are there any fds that has its
          * bits turned on by select() this can be checked using FD_ISSET() */
         for (int fd = 0; fd <= server.max_fd; ++fd) {
-            if (FD_ISSET(fd, &server.ready_set)) {
+            if (FD_ISSET(fd, &server.ready_set) != 0) {
                 /* once we find a fd with 1 (turned on) we check whether its
                  * the server socket. If it is its new incoming connection else
                  * its an already exisiting client trying to send a message */
