@@ -1,6 +1,7 @@
 #include <string.h>
 #include <strings.h>
 #include <sys/select.h>
+#include <threads.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <netdb.h>
@@ -8,9 +9,11 @@
 #include <netinet/in.h>
 #include <stdio.h>
 
+#define MAXMSGLIMIT 100000
+
 typedef struct s_client {
     int id;
-    char msg[100000];
+    char msg[MAXMSGLIMIT];
 } t_client;
 
 typedef struct s_server {
@@ -25,6 +28,9 @@ typedef struct s_server {
 } t_server;
 
 t_server server;
+
+char sendbuff[MAXMSGLIMIT + 50];
+char recvbuff[MAXMSGLIMIT];
 
 void err() {
     write(2, "Fatal error\n", 12);
@@ -77,8 +83,30 @@ void add_new_client() {
     broadcast_message(connfd, msg);
 }
 
-void handle_existing_client() {
-    return;
+void handle_existing_client(int fd) {
+    int rec = recv(fd, recvbuff, sizeof(recvbuff) - 1, 0);
+    if (rec <= 0) { // handle disconnection
+        char msg[128];
+        sprintf(msg, "server: client %d just left\n", server.clients[fd].id);
+        broadcast_message(fd, msg);
+        FD_CLR(fd, &server.current_set);
+        close(fd);
+    } else {
+        recvbuff[rec] = '\0'; // buffer is read we have to null terminate
+        strcat(server.clients[fd].msg, recvbuff);
+
+        char *msg_ptr = server.clients[fd].msg;
+        char *newline_ptr = NULL;
+
+        while ((newline_ptr = strstr(msg_ptr, "\n"))) {
+            *newline_ptr = '\0';
+            sprintf(sendbuff, "client %d: %s\n", server.clients[fd].id,
+                    msg_ptr);
+            broadcast_message(fd, sendbuff);
+            msg_ptr = newline_ptr + 1;
+        }
+        strcpy(server.clients[fd].msg, msg_ptr);
+    }
 }
 
 void event_loop() {
@@ -117,7 +145,7 @@ void event_loop() {
                 if (fd == server.sockfd)
                     add_new_client();
                 else
-                    handle_existing_client();
+                    handle_existing_client(fd);
             }
         }
     }
